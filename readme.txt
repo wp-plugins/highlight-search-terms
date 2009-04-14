@@ -34,7 +34,7 @@ Please find more examples under the "Other Notes" tab.
 
 == Frequently Asked Questions ==
 
-**Q: I do not see any highlighting! :? **
+**Q: I do not see any highlighting!**
 
 **A:** This plugin has no configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling you need. See tab "Other Notes" for some examples to get you started.
 
