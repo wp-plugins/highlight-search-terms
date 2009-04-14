@@ -36,7 +36,11 @@ Please find more examples under the "Other Notes" tab.
 
 **Q: I do not see any highlighting!**
 
-**A:** This plugin has no configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling you need. See tab "Other Notes" for some examples to get you started.
+**A:** This plugin has no configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling you need. 
+
+**Q: Can you give me some examples for my stylesheet?**
+
+**A:** See tab "Other Notes" for some examples to get you started.
 
 == Screenshots ==
 
@@ -53,18 +57,22 @@ To get you started with your own CSS styling that fits your theme, see the follo
 Go in your WP admin section to Themes > Edit and find your Stylesheet. Scroll all the way to the bottom and add one of the examples (or your modification of it) on a fresh new line.
 
 To get a moss green background highlighting on every search term on your webpage:
+
     .hilite { background-color:#D3E18A }
 
 
 Yellow background highlighting on every search term on your webpage:
+
     .hilite { background-color:yellow }
 
 
 Or light blue background with bold fonts but limited to search terms in your main content section and not the header, sidebar or footer (assuming your theme uses a div with id "content" for the content section):
+
     #content .hilite { background-color:#9CD4FF; font-weight:bold }
 
 
 Orange background with black font limited to post content only and not comments (for example, assuming your theme wraps your post in a div with class "post"):
+
     .post .hilite { background-color:#FFCA61; color:#0000 }
 
 
