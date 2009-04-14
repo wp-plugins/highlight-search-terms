@@ -20,14 +20,13 @@ This low impact plugin uses only two action hooks, **init** and **wp_head** to i
 
 I. Use the slick search and install feature on your WP2.7+ Pugins admin section or follow these steps.
 
-    1. Download archive and unpack.
-    2. Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
-    3. Activate plugin on the Plug-ins page
+1. Download archive and unpack.
+2. Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
+3. Activate plugin on the Plug-ins page
 
-4. Add a new rule to your themes styleheet (style.css) to style the highlighted text. 
+II. Add a new rule to your themes styleheet (style.css) to style the highlighted text. 
 
-Example:
-`#content .hilite { background:#D3E18A; }`
+for example use `#content .hilite { background:#D3E18A; }` to get a moss green background.
 
 Please find more examples under the "Other Notes" tab.
 
@@ -39,11 +38,9 @@ Please find more examples under the "Other Notes" tab.
 
 == Screenshots ==
 
-http://weblogtoolscollection.com/b2-img/2009/04/search_result.png
+1. An example image provided by [How to Highlight Search Terms with jQuery](http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/ "How to Highlight Search Terms with jQuery | Weblog Tools Collection") on which this plugin is largely based.
 
-This is an example image provided by [How to Highlight Search Terms with jQuery](http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/ "How to Highlight Search Terms with jQuery | Weblog Tools Collection") on which this plugin is largely based.
-
-== Other Notes ==
+= Notes =
 
 Many blogs are already top-heavy with all kinds of hungy plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_head. The rest is done by jQuery javascript extention and your own CSS.
 
@@ -54,16 +51,20 @@ To get you started with your own CSS styling that fits your theme, see the follo
 Go in your WP admin section to Themes > Edit and find your Stylesheet. Scroll all the way to the bottom and add one of the examples (or your modification of it) on a fresh new line.
 
 To get a moss green background highlighting on every search term on your webpage:
-`.hilite { background-color:#D3E18A }`
+
+    .hilite { background-color:#D3E18A }
 
 Yellow background highlighting on every search term on your webpage:
-`.hilite { background-color:yellow }`
+
+    .hilite { background-color:yellow }
 
 Or light blue background with bold fonts but limited to search terms in your main content section and not the header, sidebar or footer (assuming your theme uses a div with id "content" for the content section):
-`#content .hilite { background-color:#9CD4FF; font-weight:bold }`
+
+    #content .hilite { background-color:#9CD4FF; font-weight:bold }
 
 Orange background with black font limited to post content only and not comments (for example, assuming your theme wraps your post in a div with class "post"):
-`.post .hilite { background-color:#FFCA61; color:#0000 }`
+
+    .post .hilite { background-color:#FFCA61; color:#0000 }
 
 = Known issues =
 
