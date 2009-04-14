@@ -22,9 +22,9 @@ There are _no_ configuration option and there is _no_ predefined highlight styli
 
 I. Use the slick search and install feature on your WP2.7+ Pugins admin section or follow these steps.
 
-1. Download archive and unpack.
-2. Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
-3. Activate plugin on the Plug-ins page
+- Download archive and unpack.
+- Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
+- Activate plugin on the Plug-ins page
 
 II. Add a new rule to your themes styleheet (style.css) to style the highlighted text. 
 
@@ -53,20 +53,20 @@ To get you started with your own CSS styling that fits your theme, see the follo
 Go in your WP admin section to Themes > Edit and find your Stylesheet. Scroll all the way to the bottom and add one of the examples (or your modification of it) on a fresh new line.
 
 To get a moss green background highlighting on every search term on your webpage:
-
     .hilite { background-color:#D3E18A }
 
-Yellow background highlighting on every search term on your webpage:
 
+Yellow background highlighting on every search term on your webpage:
     .hilite { background-color:yellow }
 
-Or light blue background with bold fonts but limited to search terms in your main content section and not the header, sidebar or footer (assuming your theme uses a div with id "content" for the content section):
 
+Or light blue background with bold fonts but limited to search terms in your main content section and not the header, sidebar or footer (assuming your theme uses a div with id "content" for the content section):
     #content .hilite { background-color:#9CD4FF; font-weight:bold }
 
-Orange background with black font limited to post content only and not comments (for example, assuming your theme wraps your post in a div with class "post"):
 
+Orange background with black font limited to post content only and not comments (for example, assuming your theme wraps your post in a div with class "post"):
     .post .hilite { background-color:#FFCA61; color:#0000 }
+
 
 = Known issues =
 
