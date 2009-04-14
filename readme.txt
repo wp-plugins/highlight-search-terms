@@ -14,7 +14,9 @@ Highlights search terms using jQuery when referer is a Google, Yahoo or Lycos or
 
 = What does it do? =
 
-This low impact plugin uses only two action hooks, **init** and **wp_head** to insert the jQuery library (already is included in your WordPress package) and a custom jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, wraps all found search terms on that page in `<span class="hilite"> ... </span>` tags. There are _no_ configuration option and there is _no_ predefined highlight styling. You are completely free to define any style in your themes style.css to get result that fists your theme best.
+This low impact plugin uses only two action hooks, **init** and **wp_head** to insert the jQuery library (already is included in your WordPress package) and a custom jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, wraps all found search terms on that page in `<span class="hilite"> ... </span>` tags. 
+
+There are _no_ configuration option and there is _no_ predefined highlight styling. You are completely free to define any style in your themes style.css to get result that fits your theme best.
 
 == Installation ==
 
