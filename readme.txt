@@ -38,13 +38,17 @@ Please find more examples under the "Other Notes" tab.
 
 **Q: I do not see any highlighting!**
 
-**A:** This plugin has no configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling you need. See tab "Other Notes" for some examples to get you started.
+**A:** This plugin has no configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling you need.
+
+**Q: I have no idea what to put in my stylesheet. Can you give me some examples?**
+
+**A:** Sure! See tab "Other Notes" for some examples to get you started.
 
 == Screenshots ==
 
 1. An example image provided by [How to Highlight Search Terms with jQuery](http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/ "How to Highlight Search Terms with jQuery | Weblog Tools Collection") on which this plugin is largely based.
 
-== Other Notes ==
+== About ==
 
 Many blogs are already top-heavy with all kinds of hungy plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_head. The rest is done by jQuery javascript extention and your own CSS.
 
@@ -58,17 +62,23 @@ To get a moss green background highlighting on every search term on your webpage
 
     .hilite { background-color:#D3E18A }
 
+
 Yellow background highlighting on every search term on your webpage:
 
     .hilite { background-color:yellow }
+
 
 Or light blue background with bold fonts but limited to search terms in your main content section and not the header, sidebar or footer (assuming your theme uses a div with id "content" for the content section):
 
     #content .hilite { background-color:#9CD4FF; font-weight:bold }
 
+
 Orange background with black font limited to post _content_ and _title_ only and not the comments or any other section of the page (assuming your theme wraps your post in a div with class "post"):
 
     .post .hilite { background-color:#FFCA61; color:#0000 }
+
+
+For more intricate styling, see the advanced example below. 
 
 = Advanced CSS Example =
 
@@ -79,7 +89,8 @@ If you want to give different terms used in a search phrase a different styling,
     .post .term-2 { background-color:#9CD4FF } /* third search term only */
     .post .term-3 { background-color:#FFCA61 } /* fourth search term only */
 
-Keep in mind that class "term-0" is used for the _first_ search term, not "term-1" !
+
+Keep in mind that class "term-0" is used for the _first_ search term, not "term-1" ! 
 
 = Known issues =
 

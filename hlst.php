@@ -2,7 +2,7 @@
 /*
 Plugin Name: Highlight Search Terms
 Plugin URI: http://wordpress.org/exptend/plugins/highlight-search-terms
-Description: Highlights search terms when referer is a search engine or within wp search results using jQuery. No options to set, just add a CSS rule for class "hilite" to your stylesheet to make the highlights show up any way you want them to. Example: .hentry .hilite { background-color:yellow }
+Description: Highlights search terms when referer is a search engine or within wp search results using jQuery. No options to set, just add a CSS rule for class "hilite" to your stylesheet to make the highlights show up any way you want them to. Example: " .post .hilite { background-color:yellow } " Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and more examples.
 Version: 0.2
 Author: RavanH
 Author URI: http://4visions.nl/
