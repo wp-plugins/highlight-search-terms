@@ -54,27 +54,25 @@ To get you started with your own CSS styling that fits your theme, see the follo
 
 = CSS Examples =
 
-Go in your WP admin section to Themes > Edit and find your Stylesheet. Scroll all the way to the bottom and add one of the examples (or your modification of it) on a fresh new line.
-
-To get a moss green background highlighting on every search term on your webpage:
+Go in your WP admin section to Themes > Edit and find your Stylesheet. Scroll all the way to the bottom and add one of the examples (or your modification of it) on a fresh new line. 
 
     .hilite { background-color:#D3E18A }
 
-
-Yellow background highlighting on every search term on your webpage:
+For a moss green background highlighting on every search term on your webpage.
 
     .hilite { background-color:yellow }
 
+Yellow background highlighting on every search term on your webpage.
 
-Or light blue background with bold fonts but limited to search terms in your main content section and not the header, sidebar or footer (assuming your theme uses a div with id "content" for the content section):
+These following examples work in the Default theme included in WordPress and should work in many others, but you might find your theme needs different markup.
 
     #content .hilite { background-color:#9CD4FF; font-weight:bold }
 
-
-Orange background with black font limited to post content only and not comments (for example, assuming your theme wraps your post in a div with class "post"):
+A light blue background with bold fonts but limited to search terms in your main content section and not the header, sidebar or footer (assuming your theme uses a div with id "content" for the content section).
 
     .post .hilite { background-color:#FFCA61; color:#0000 }
 
+Orange background with black font limited to post content only and not comments (assuming your theme wraps your post in a div with class "post").
 
 = Known issues =
 
