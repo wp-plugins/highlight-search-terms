@@ -1,7 +1,7 @@
 === Highlight Search Terms ===
 Contributors: RavanH
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=2%2e6%2e2%2e9&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8
-Tags: search, highlight, jquery, hilite, google, yahoo, lycos, search engine
+Tags: search, highlight, jquery, hilite, google, yahoo, lycos, search term
 Requires at least: 2.3
 Tested up to: 2.7.1
 Stable tag: 0.1
@@ -14,21 +14,23 @@ Highlights search terms using jQuery when referer is a Google, Yahoo or Lycos or
 
 = What does it do? =
 
-This low impact plugin uses only two action hooks, **init** and **wp_head** to insert the jQuery library (already is included in your WordPress package) and a custom jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, wraps all found search terms on that page in `<span class="hilite"> ... </span>` tags. 
+This low impact plugin uses only two action hooks, **init** and **wp_head** to insert the jQuery library (already is included in your WordPress package) and a custom jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, wraps all found search terms on that page in `<span class="hilite term-N"> ... </span>` tags, where N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
 
-There are _no_ configuration option and there is _no_ predefined highlight styling. You are completely free to define any style in your themes style.css to get result that fits your theme best.
+There are _no_ configuration options and there is _no_ predefined highlight styling. You are completely free to define any style in your themes style.css to get result that fits your theme best.
 
 == Installation ==
 
+To make it work, you will need to take two steps. A normal installation and actiavtion procedure _and_ editing your Theme Stylesheet to contain new rules for your highlights.
+
 I. Use the slick search and install feature on your WP2.7+ Pugins admin section or follow these steps.
 
-1. Download archive and unpack.
-2. Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
-3. Activate plugin on the Plug-ins page
+- Download archive and unpack.
+- Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
+- Activate plugin on the Plug-ins page
 
 II. Add a new rule to your themes styleheet (style.css) to style the highlighted text. 
 
-for example use `#content .hilite { background:#D3E18A; }` to get a moss green background.
+for example use `#content .hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with ID "content").
 
 Please find more examples under the "Other Notes" tab.
 
@@ -42,13 +44,13 @@ Please find more examples under the "Other Notes" tab.
 
 1. An example image provided by [How to Highlight Search Terms with jQuery](http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/ "How to Highlight Search Terms with jQuery | Weblog Tools Collection") on which this plugin is largely based.
 
-= Notes =
+= Note =
 
 Many blogs are already top-heavy with all kinds of hungy plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_head. The rest is done by jQuery javascript extention and your own CSS.
 
 To get you started with your own CSS styling that fits your theme, see the following examples.
 
-= CSS Examples =
+= Basic CSS Examples =
 
 Go in your WP admin section to Themes > Edit and find your Stylesheet. Scroll all the way to the bottom and add one of the examples (or your modification of it) on a fresh new line.
 
@@ -64,9 +66,20 @@ Or light blue background with bold fonts but limited to search terms in your mai
 
     #content .hilite { background-color:#9CD4FF; font-weight:bold }
 
-Orange background with black font limited to post content only and not comments (for example, assuming your theme wraps your post in a div with class "post"):
+Orange background with black font limited to post _content_ and _title_ only and not the comments or any other section of the page (assuming your theme wraps your post in a div with class "post"):
 
     .post .hilite { background-color:#FFCA61; color:#0000 }
+
+= Advanced CSS Example =
+
+If you want to give different terms used in a search phrase a different styling, use the class "term-N" (where N is a number starting with 0, increasing 1 with each search term) to define your CSS rules. The below example will make every term have bold text, the first term will have a yellow background, the second, third and fourth term will have respectively a light green, light blue and orange background and subsequent terms will have a yellow background again.
+
+    .post .hilite { background-color:yellow; font-weight:bold } /* default; for first and fith term and up */
+    .post .term-1 { background-color:#D3E18A } /* second term only */
+    .post .term-2 { background-color:#9CD4FF } /* third term only */
+    .post .term-3 { background-color:#FFCA61 } /* fourth term only */
+
+Keep in mind that class "term-0" is used for the _first_ search term, not "term-1".
 
 = Known issues =
 
