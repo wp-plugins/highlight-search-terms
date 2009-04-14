@@ -44,7 +44,7 @@ Please find more examples under the "Other Notes" tab.
 
 1. An example image provided by [How to Highlight Search Terms with jQuery](http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/ "How to Highlight Search Terms with jQuery | Weblog Tools Collection") on which this plugin is largely based.
 
-= Note =
+== Other Notes ==
 
 Many blogs are already top-heavy with all kinds of hungy plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_head. The rest is done by jQuery javascript extention and your own CSS.
 
@@ -74,12 +74,12 @@ Orange background with black font limited to post _content_ and _title_ only and
 
 If you want to give different terms used in a search phrase a different styling, use the class "term-N" (where N is a number starting with 0, increasing 1 with each search term) to define your CSS rules. The below example will make every term have bold text, the first term will have a yellow background, the second, third and fourth term will have respectively a light green, light blue and orange background and subsequent terms will have a yellow background again.
 
-    .post .hilite { background-color:yellow; font-weight:bold } /* default; for first and fith term and up */
-    .post .term-1 { background-color:#D3E18A } /* second term only */
-    .post .term-2 { background-color:#9CD4FF } /* third term only */
-    .post .term-3 { background-color:#FFCA61 } /* fourth term only */
+    .post .hilite { background-color:yellow; font-weight:bold } /* default search term style */
+    .post .term-1 { background-color:#D3E18A } /* second search term only */
+    .post .term-2 { background-color:#9CD4FF } /* third search term only */
+    .post .term-3 { background-color:#FFCA61 } /* fourth search term only */
 
-Keep in mind that class "term-0" is used for the _first_ search term, not "term-1".
+Keep in mind that class "term-0" is used for the _first_ search term, not "term-1" !
 
 = Known issues =
 

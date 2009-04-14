@@ -2,8 +2,8 @@
 /*
 Plugin Name: Highlight Search Terms
 Plugin URI: http://wordpress.org/exptend/plugins/highlight-search-terms
-Description: Highlights search terms when referer is a search engine or within wp search results using jQuery. A lightweight, low impact fusion between <a href="http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/">How to Highlight Search Terms with jQuery - theme hack by Thaya Kareeson</a> and <a href="http://wordpress.org/extend/plugins/google-highlight/">Search Hilite by Ryan Boren</a>.
-Version: 0.1
+Description: Highlights search terms when referer is a search engine or within wp search results using jQuery. No options to set, just add a CSS rule for class "hilite" to your stylesheet to make the highlights show up any way you want them to. Example: .hentry .hilite { background-color:yellow }
+Version: 0.2
 Author: RavanH
 Author URI: http://4visions.nl/
 */
@@ -93,7 +93,7 @@ function hlst_extend() {
   jQuery(document).ready(function($){
     if(typeof(hlst_query) != 'undefined'){
       for (i in hlst_query){
-        $("<?php echo $area; ?>").highlight(hlst_query[i], 1, "hilite");
+        $("<?php echo $area; ?>").highlight(hlst_query[i], 1, "hilite term-"+i);
       }
     }
   });
