@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravan
 Tags: search, highlight, jquery, hilite, google, yahoo, lycos, search term
 Requires at least: 2.3
 Tested up to: 2.7.1
-Stable tag: 0.1
+Stable tag: 0.2
 
 Lightweight search terms highlighter when referer is a search engine or within wp search results using jQuery. 
 
