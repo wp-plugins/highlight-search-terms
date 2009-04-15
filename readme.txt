@@ -95,5 +95,6 @@ None so far :) Please provide me with a bugreport, suggestion or question if you
 
 = Revision History =
 
+- [2009-04-15] version 0.2: Allowing for multiple search term styling + Bugfix for IE7 / IE8
 - [2009-04-14] version 0.1: Basic plugin aimed at low impact / low resource demand on your WP installation using client side javascript.
 
