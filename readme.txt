@@ -1,7 +1,7 @@
 === Highlight Search Terms ===
 Contributors: RavanH
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=0%2e2&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8
-Tags: search, highlight, jquery, hilite, google, yahoo, lycos, search term
+Tags: search, search term, highlight, hilite, google, yahoo, lycos, jquery, javascript
 Requires at least: 2.3
 Tested up to: 2.7.1
 Stable tag: 0.2
