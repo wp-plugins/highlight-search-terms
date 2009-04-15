@@ -83,10 +83,10 @@ function hlst_extend() {
 <script type="text/javascript">
   var hlst_query  = new Array(<?php echo implode(",",$filtered); ?>);
   jQuery.fn.extend({
-    highlight: function(search, insensitive, class){
+    highlight: function(search, insensitive, span_class){
       var regex = new RegExp("(<[^>]*>)|(\\b"+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +")", insensitive ? "ig" : "g");
       return this.html(this.html().replace(regex, function(a, b, c){
-        return (a.charAt(0) == "<") ? a : "<span class=\""+ class +"\">" + c + "</span>";
+        return (a.charAt(0) == "<") ? a : "<span class=\""+ span_class +"\">" + c + "</span>";
       }));
     }
   });
