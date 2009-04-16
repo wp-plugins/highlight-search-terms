@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravan
 Tags: search, search term, highlight, hilite, google, yahoo, lycos, jquery, javascript
 Requires at least: 2.3
 Tested up to: 2.7.1
-Stable tag: 0.2
+Stable tag: 0.3
 
 Lightweight search terms highlighter when referer is a search engine or within wp search results using jQuery. 
 
@@ -47,6 +47,19 @@ Please find more examples under the [Other Notes](http://wordpress.org/extend/pl
 **Q: I have no idea what to put in my stylesheet. Can you give me some examples?**
 
 **A:** Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) for instructions and some examples to get you started.
+
+**Q: I _STILL_ do not see any highlighting!**
+
+**A:** Because of a problem with jQuery and the ever increasingly popular Firefox browser, I have had to limit the script highlighting to a particular div instead of the whole document. I chose div with ID "content" since that is the most commonly used content layer ID in WordPress themes. However, in your particular theme, that might be different... 
+
+Let's suppose your theme has no `<div id="content">` but wraps the main content in a `<div id="main" class="content"> ... </div>`. You can do two things to solve this:
+
+1. Change your theme and stylesheet so the main content div has ID "content". But this might involve some real timeconsuming tinkering with your stylesheet and several theme template files.
+
+2. Change the source of wp-content/plugins/highlight-search-terms/hlst.php on line 71 so that the string reflects your main content ID or class name. In the above example that can be either `$area = '#main';` or `$area = '.content';` where a prefix '#' is used for ID and '.' for class. 
+
+I hope to have found a solution for this issue with FireFox in the next release!    
+
 
 == Screenshots ==
 
@@ -103,6 +116,7 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 = Revision History =
 
+- [2009-04-16] version 0.3: Bugfix for Firefox 2+ (forcefully highlights now limited to div#content)
 - [2009-04-15] version 0.2: Allowing for multiple search term styling + Bugfix for IE7 / IE8
 - [2009-04-14] version 0.1: Basic plugin aimed at low impact / low resource demand on your WP installation using client side javascript.
 
