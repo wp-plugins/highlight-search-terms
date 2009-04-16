@@ -66,7 +66,7 @@ function hlst_style() {
 function hlst_extend() {
 	$terms = hlst_get_search_query();
 
-	$area = 'body';
+	$area = '#content';
 
 	if(count($terms) > 0){
 		$filtered = array();
