@@ -93,7 +93,7 @@ function hlst_extend() {
   jQuery(document).ready(function($){
     if(typeof(hlst_query) != 'undefined'){
       for (i in hlst_query){
-        $("<?php echo $area; ?>").highlight(hlst_query[i], 1, "hilite term-"+i);
+        $("#content").highlight(hlst_query[i], 1, "hilite term-"+i);
       }
     }
   });
