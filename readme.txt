@@ -50,7 +50,7 @@ Please find more examples under the [Other Notes](http://wordpress.org/extend/pl
 
 **Q: I _STILL_ do not see any highlighting!**
 
-**A:** Because of a problem with jQuery and the ever increasingly popular Firefox browser, I have had to limit the script highlighting to a particular div instead of the whole document. I chose div with ID "content" since that is the most commonly used content layer ID in WordPress themes. However, in your particular theme, that might be different... 
+**A:** Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and many other javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script highlighting to a particular div instead of the whole document body. I chose div with ID "content" since that is the most commonly used content layer ID in WordPress themes. However, in your particular theme, that might be different... 
 
 Let's suppose your theme has no `<div id="content">` but wraps the main content in a `<div id="main" class="content"> ... </div>`. You can do two things to solve this:
 
