@@ -24,17 +24,17 @@ You can find basic instructions and CSS examples under the [Other Notes](http://
 
 == Installation ==
 
-To make it work, you will need to take two steps. A normal installation and actiavtion procedure _and_ editing your Theme Stylesheet to contain new rules for your highlights.
+To make it work, you will need to take two steps. (I) A normal installation and activation procedure _and_ (II) editing your Theme Stylesheet to contain your personal highlight styling rules.
 
-I. Use the slick search and install feature on your WP2.7+ Pugins admin section or follow these steps.
+I. Use the slick search and install feature (Plugins -> Add New) in your WP2.7+ admin section or follow these basic steps.
 
 - Download archive and unpack.
 - Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
 - Activate plugin on the Plug-ins page
 
-II. Add a new rule to your themes styleheet (style.css) to style the highlighted text. 
+II. Add at least _one_ new rule to your themes styleheet (style.css) to style highlightable text. 
 
-for example use `#content .hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with ID "content").
+For example use `#content .hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with ID "content").
 
 Please find more examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
 
@@ -42,7 +42,7 @@ Please find more examples under the [Other Notes](http://wordpress.org/extend/pl
 
 **Q: I do not see any highlighting!**
 
-**A:** This plugin has no configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling you need.
+**A:** This plugin has _no_ configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling that fits your theme.
 
 **Q: I have no idea what to put in my stylesheet. Can you give me some examples?**
 
@@ -50,7 +50,7 @@ Please find more examples under the [Other Notes](http://wordpress.org/extend/pl
 
 **Q: I _STILL_ do not see any highlighting!**
 
-**A:** Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and many other javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script highlighting to a particular div instead of the whole document body. I chose div with ID "content" since that is the most commonly used content layer ID in WordPress themes. However, in your particular theme, that might be different... 
+**A:** Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script highlighting to a particular div instead of the whole document body. I chose div with ID "content" since that is the most commonly used content layer ID in WordPress themes. However, in your particular theme, that might be different... 
 
 Let's suppose your theme has no `<div id="content">` but wraps the main content in a `<div id="main" class="content"> ... </div>`. You can do two things to solve this:
 
@@ -58,7 +58,7 @@ Let's suppose your theme has no `<div id="content">` but wraps the main content 
 
 2. Change the source of wp-content/plugins/highlight-search-terms/hlst.php on line 71 so that the string reflects your main content ID or class name. In the above example that can be either `$area = '#main';` or `$area = '.content';` where a prefix '#' is used for ID and '.' for class. 
 
-I hope to have found a solution for this issue with FireFox in the next release!    
+As soon as I have found a solution for this issue with FireFox, I will put it in the next release! If anyone has tips for me, please let me know :)    
 
 
 == Screenshots ==
@@ -67,7 +67,7 @@ I hope to have found a solution for this issue with FireFox in the next release!
 
 == About ==
 
-Many blogs are already top-heavy with all kinds of hungy plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_head. The rest is done by jQuery javascript extention and your own CSS.
+Many blogs are already top-heavy with all kinds of resource hungry plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_head. The rest is done by jQuery javascript extention and your own CSS.
 
 To get you started with your own CSS styling that fits your theme, see the following examples.
 
@@ -99,7 +99,7 @@ For more intricate styling, see the advanced example below.
 
 = Advanced CSS Example =
 
-If you want to give different terms used in a search phrase a different styling, use the class "term-N" (where N is a number starting with 0, increasing 1 with each search term) to define your CSS rules. The below example will make every term have bold text, the first term will have a yellow background, the second, third and fourth term will have respectively a light green, light blue and orange background and subsequent terms will have a yellow background again.
+If you want to give different terms used in a search phrase a different styling, use the class "term-N" (where N is a number starting with 0, increasing 1 with each additional search term) to define your CSS rules. The below example will make every term have bold text, the first term will have a yellow background, the second, third and fourth term will have respectively a light green, light blue and orange background and subsequent terms will have a yellow background again.
 
     .post .hilite { background-color:yellow; font-weight:bold } /* default */
     .post .term-1 { background-color:#D3E18A } /* second search term only */
@@ -109,6 +109,8 @@ If you want to give different terms used in a search phrase a different styling,
 Keep in mind that for the _first_ search term the class "term-0" is used, not "term-1"! 
 
 = Known issues =
+
+If your theme does not wrap the main content section of your pages in a div with ID "content", this plugin will not work for you. However, you can make it work by a simple edit of the plugin file. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for an explanation.
 
 Thank you, [Jason](http://wordpress.org/support/profile/412612) for pointing out a bug for IE7+, fixed in 0.2. 
 
