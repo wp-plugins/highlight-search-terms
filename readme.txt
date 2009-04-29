@@ -110,7 +110,9 @@ Keep in mind that for the _first_ search term the class "term-0" is used, not "t
 
 = Known issues =
 
-If your theme does not wrap the main content section of your pages in a div with ID "content", this plugin will not work for you. However, you can make it work by a simple edit of the plugin file. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for an explanation.
+1. If your theme does not wrap the main content section of your pages in a div with ID "content", this plugin will not work for you. However, you can make it work by a simple edit of the plugin file. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for an explanation.
+
+2. [Josh](http://theveganpost.com) pointed out a conflict with the [ShareThis button](http://sharethis.com/wordpress). I have no clue why this happens and have no solution but to resort to an alternative for the ShareThis button _or_ for this highlighter plugin, untill I hear from the ShareThis developers. Sorry. :(
 
 Thank you, [Jason](http://wordpress.org/support/profile/412612) for pointing out a bug for IE7+, fixed in 0.2. 
 
