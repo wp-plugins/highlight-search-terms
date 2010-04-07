@@ -123,6 +123,7 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 = 0.4 =
 Date: 2010-04-07
 - Bugfix for IE8
+- fixed Regular Expression to allow parts of words to be higlighted
 
 = 0.3 =
 Date: 2009-04-16
