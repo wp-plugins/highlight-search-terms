@@ -119,7 +119,7 @@ var regex = new RegExp('(<[^>]*>)|('+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,
 add_action('init', 'hlst_init_jquery');
 
 // Set query string as js variable and extend jQ in header
-add_action('wp_footer', 'hlst_extend');
+add_action('wp_header', 'hlst_extend');
 
 //Add CSS (uncomment the line below to append CSS styling without editing your style.css)
 //add_action('wp_print_styles', 'hlst_style');
