@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://wordpress.org/extend/plugins/highlight-search-terms
 Description: Highlights search terms when referer is a search engine or within wp search results using jQuery. No options to set, just add a CSS rule for class "hilite" to your stylesheet to make the highlights show up any way you want them to. Example: " .post .hilite { background-color:yellow } " Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and more examples.
-Version: 0.4b
+Version: 0.4
 Author: RavanH
 Author URI: http://4visions.nl/
 */
@@ -65,10 +65,8 @@ function hlst_style() {
 // Extend jQ 
 function hlst_extend() {
 	$terms = hlst_get_search_query();
-	if(count($terms) == 0)
-		return;
 
-	$area = '#content'; // change this to your themes content div ID (starting with #) or class (starting with .)
+	$area = '.hentry'; // change this to your themes content div ID (starting with #) or class (starting with .)
 	$filtered = array();
 
 	foreach($terms as $term){
@@ -80,8 +78,11 @@ function hlst_extend() {
 
 	if (count($filtered) > 0) {
 ?>
+
+<!-- Highlight Search Terms plugin ( RavanH - http://4visions.nl/ ) -->
 <script type="text/javascript">
-  var hlst_query  = new Array(<?php echo implode(",",$filtered); ?>);
+/* <![CDATA[ */
+  var hlst_query  = new Array(<?php echo implode(",",$filtered) ?>);
   jQuery.fn.extend({
     highlight: function(search, insensitive, span_class){
       var regex = new RegExp('(<[^>]*>)|('+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', insensitive ? 'ig' : 'g');
@@ -93,31 +94,32 @@ function hlst_extend() {
   jQuery(document).ready(function($){
     if(typeof(hlst_query) != 'undefined'){
       for (i in hlst_query){
-        $('<?php echo $area; ?>').highlight(hlst_query[i], 1, 'hilite term-' + i);
+        $("<?php echo $area ?>").highlight(hlst_query[i], 1, 'hilite term-' + i);
       }
     }
   });
-</script> 
+/* ]]> */
+</script>
+<!-- end Highlight Search Terms -->
+
 <?php
 /*
-Take out the \\b off the var regex variable, if you want to match the term any where in the text - not just at a word boundary.
-
+Took out the \\b off the var regex variable, to match the term any where in the text - not just at a word boundary.
 old:
-var regex = new RegExp('(<[^>]*>)|(\\b'+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,'\\$1') +')', insensitive ? 'ig' : 'g');
-
+var regex = new RegExp('(<[^>]*>)|(\\b'+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', insensitive ? 'ig' : 'g');
 new:
-var regex = new RegExp('(<[^>]*>)|('+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,'\\$1') +')', insensitive ? 'ig' : 'g');
+var regex = new RegExp('(<[^>]*>)|('+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', insensitive ? 'ig' : 'g');
 */
 	}
 } 
 
 // -- HOOKING INTO WP -- //
 
-// Call jQ library in header TODO: make this happen only when there is a search term or if referrer is search engine
+// Call jQ library in header
 add_action('init', 'hlst_init_jquery');
 
 // Set query string as js variable and extend jQ in header
-add_action('wp_head', 'hlst_extend');
+add_action('wp_footer', 'hlst_extend');
 
 //Add CSS (uncomment the line below to append CSS styling without editing your style.css)
 //add_action('wp_print_styles', 'hlst_style');
