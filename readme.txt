@@ -14,7 +14,7 @@ Highlights search terms using jQuery when referer is a Google, Yahoo or Lycos se
 
 = What does it do? =
 
-This low impact plugin uses only two action hooks, **init** to insert the jQuery library (already included in your WordPress package) and **wp_footer** to add a custom jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, wraps all found search terms on that page in `<span class="hilite term-N"> ... </span>` tags, where N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
+This low impact plugin uses only two action hooks, **init** to insert the jQuery library (already included in your WordPress package) and **wp_head** to add a custom jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, wraps all found search terms on that page in `<span class="hilite term-N"> ... </span>` tags, where N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
 
 = What do I need to do? =
 
@@ -34,7 +34,7 @@ I. Use the slick search and install feature (Plugins -> Add New) in your WP2.7+ 
 
 II. Add at least _one_ new rule to your themes styleheet (style.css) to style highlightable text. 
 
-For example use `.hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with ID "content").
+For example use `.hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with class "hentry").
 
 Please find more examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
 
@@ -67,7 +67,7 @@ As soon as I have found a solution for this issue with FireFox, I will put it in
 
 == Other Notes ==
 
-Many blogs are already top-heavy with all kinds of resource hungry plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_footer. The rest is done by jQuery javascript extention and your own CSS.
+Many blogs are already top-heavy with all kinds of resource hungry plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_head. The rest is done by jQuery javascript extention and your own CSS.
 
 To get you started with your own CSS styling that fits your theme, see the following examples.
 
@@ -122,7 +122,6 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 Date: 2010-04-07
 - fixed Regular Expression to allow parts of words to be higlighted
 - load jQuery and Hilite extention only when needed
-- moved Hilite extention to footer
 - search term wrapping limited to .hentry divs
 
 = 0.3 =
