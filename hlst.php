@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://wordpress.org/extend/plugins/highlight-search-terms
 Description: Highlights search terms when referer is a search engine or within wp search results using jQuery. No options to set, just add a CSS rule for class "hilite" to your stylesheet to make the highlights show up any way you want them to. Example: " .post .hilite { background-color:yellow } " Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and more examples.
-Version: 0.3
+Version: 0.4b
 Author: RavanH
 Author URI: http://4visions.nl/
 */
@@ -84,21 +84,30 @@ function hlst_extend() {
   var hlst_query  = new Array(<?php echo implode(",",$filtered); ?>);
   jQuery.fn.extend({
     highlight: function(search, insensitive, span_class){
-      var regex = new RegExp('(<[^>]*>)|(\\b'+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,'\\$1') +')', insensitive ? 'ig' : 'g');
+      var regex = new RegExp("(<[^>]*>)|("+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +")", insensitive ? "ig" : "g");
       return this.html(this.html().replace(regex, function(a, b, c){
-        return (a.charAt(0) == '<') ? a : '<span class=\"'+ span_class +'\">' + c + '</span>';
+        return (a.charAt(0) == "<") ? a : "<span class=\""+ span_class +"\">" + c + "</span>";
       }));
     }
   });
   jQuery(document).ready(function($){
     if(typeof(hlst_query) != 'undefined'){
       for (i in hlst_query){
-        $('<?php echo $area; ?>').highlight(hlst_query[i], 1, 'hilite term-' + i);
+        $("<?php echo $area; ?>").highlight(hlst_query[i], 1, "hilite term-" + i);
       }
     }
   });
 </script> 
 <?php
+/*
+Take out the \\b off the var regex variable, if you want to match the term any where in the text - not just at a word boundary.
+
+old:
+var regex = new RegExp('(<[^>]*>)|(\\b'+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,'\\$1') +')', insensitive ? 'ig' : 'g');
+
+new:
+var regex = new RegExp('(<[^>]*>)|('+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,'\\$1') +')', insensitive ? 'ig' : 'g');
+*/
 	}
 } 
 

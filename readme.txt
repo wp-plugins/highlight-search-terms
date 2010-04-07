@@ -65,7 +65,7 @@ As soon as I have found a solution for this issue with FireFox, I will put it in
 
 1. An example image provided by [How to Highlight Search Terms with jQuery](http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/ "How to Highlight Search Terms with jQuery | Weblog Tools Collection") on which this plugin is largely based.
 
-== About ==
+== Other Notes ==
 
 Many blogs are already top-heavy with all kinds of resource hungry plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_head. The rest is done by jQuery javascript extention and your own CSS.
 
@@ -118,9 +118,21 @@ Thank you, [Jason](http://wordpress.org/support/profile/412612) for pointing out
 
 Please provide me with a bugreport, suggestion or question if you run into any problems!
 
-= Revision History =
+== Changelog ==
 
-- [2009-04-16] version 0.3: Bugfix for Firefox 2+ (forcefully highlights now limited to div#content)
-- [2009-04-15] version 0.2: Allowing for multiple search term styling + Bugfix for IE7 / IE8
-- [2009-04-14] version 0.1: Basic plugin aimed at low impact / low resource demand on your WP installation using client side javascript.
+= 0.4 =
+Date: 2010-04-07
+- Bugfix for IE8
+
+= 0.3 =
+Date: 2009-04-16
+- Bugfix for Firefox 2+ (forcefully highlights now limited to div#content)
+
+= 0.2 =
+Date: 2009-04-15
+- Allowing for multiple search term styling + Bugfix for IE7 / IE8
+
+= 0.1 =
+Date: 2009-04-14
+- Basic plugin aimed at low impact / low resource demand on your WP installation using client side javascript.
 
