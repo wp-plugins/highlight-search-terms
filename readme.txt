@@ -100,7 +100,7 @@ For more intricate styling, see the advanced example below.
 
 = Advanced CSS Example =
 
-If you want to give different terms used in a search phrase a different styling, use the class "term-N" (where N is a number starting with 0, increasing 1 with each additional search term) to define your CSS rules. The below example will make every term have bold text and a yellow background except for the second, third and fourth term which will have respectively a light green, light blue and orange background.
+If you want to give different terms used in a search phrase a different styling, use the class "term-N" where N is a number starting with 0, increasing 1 with each additional search term, to define your CSS rules. The below example will make every instance of any term used in the query show up in bold text and a yellow background except for any instance of a second, third and fourth term which will have respectively a light green, light blue and orange background.
 
     .hilite { background-color:yellow; font-weight:bold } /* default */
     .term-1 { background-color:#D3E18A } /* second search term only */
@@ -123,8 +123,7 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 = 0.4 =
 Date: 2010-04-07
-- fixed Regular Expression to allow parts of words to be higlighted
-- load jQuery and Hilite extention only when needed
+- fixed Regular Expression to allow parts of words to be highlighted
 - search term wrapping limited to .hentry divs
 
 = 0.3 =
