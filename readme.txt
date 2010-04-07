@@ -6,7 +6,7 @@ Requires at least: 2.3
 Tested up to: 2.9.2
 Stable tag: 0.4
 
-Lightweight search terms highlighter when referer is a search engine or within wp search results using jQuery. 
+Lightweight search terms highlighter using jQuery to wrap search terms with span tags when referer is a search engine or within wp search results using jQuery. No options to set, just add a CSS rule for class "hilite" to your stylesheet to make the highlights show up any way you want them to.
 
 == Description ==
 
@@ -14,25 +14,26 @@ Highlights search terms using jQuery when referer is a Google, Yahoo or Lycos se
 
 = What does it do? =
 
-This low impact plugin uses only two action hooks, **init** to insert the jQuery library (already included in your WordPress package) and **wp_head** to add a custom jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, wraps all found search terms on that page in `<span class="hilite term-N"> ... </span>` tags, where N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
+This low impact plugin uses only two action hooks, **init** to insert the jQuery library (already included in your WordPress package) and **wp_head** to add a custom jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` and wraps them in `<span class="hilite term-N"> ... </span>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
 
 = What do I need to do? =
 
-There are _no_ configuration options and there is _no_ predefined highlight styling. You are completely free to define any CSS styling rule in your themes Stylesheet, style.css, to get a result that fits your theme best.
+There are _no_ configuration options and there is _no_ predefined highlight styling. You are completely free to define any CSS styling rules in your themes Stylesheet, style.css, to get a result that fits your theme best. You can find basic instructions and CSS examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
 
-You can find basic instructions and CSS examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
+In most up to date themes (including WP's own Default theme) post and page content is shown inside a div with class `hentry`. This means only search terms found in post and page content are highlighted. Not search terms that accidentaly show in the page header, sidebar or footer. If your current theme does not do this (yet) this plugin will not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
+
 
 == Installation ==
 
 To make it work, you will need to take two steps. (I) A normal installation and activation procedure _and_ (II) editing your Theme Stylesheet to contain your personal highlight styling rules.
 
-I. Use the slick search and install feature (Plugins -> Add New) in your WP2.7+ admin section _or_ follow these basic steps.
+**I.** Use the slick search and install feature (Plugins -> Add New) in your WP2.7+ admin section _or_ follow these basic steps.
 
 - Download archive and unpack.
 - Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
 - Activate plugin on the Plug-ins page
 
-II. Add at least _one_ new rule to your themes styleheet (style.css) to style highlightable text. 
+**II.** Add at least _one_ new rule to your themes styleheet (style.css) to style highlightable text. 
 
 For example use `.hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with class "hentry").
 
@@ -50,13 +51,15 @@ Please find more examples under the [Other Notes](http://wordpress.org/extend/pl
 
 **Q: I _STILL_ do not see any highlighting!**
 
-**A:** Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script highlighting to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. However, in your particular theme, that might be different... 
+**A:** Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. However, in your particular theme, that might be different... 
 
-Let's suppose your theme has no `<div <?php post_class() ?> ... >` but wraps the post/page content in a `<div id="main" class="content"> ... </div>`. You can do two things to solve this:
+Let's suppose your theme's index.php or single.php has no `<div <?php post_class() ?> ... >` but wraps the post/page content in a `<div id="main" class="content"> ... </div>`. You can do two things to solve this:
 
 1. Change your theme and stylesheet so the post/page content div has either `class="hentry"` or `<?php post_class() ?>`. TIP: Take a look at how it is done in the Default theme included in each WordPress release. But this might involve some real timeconsuming tinkering with your stylesheet and several theme template files.
 
-2. Change the source of wp-content/plugins/highlight-search-terms/hlst.php on line 71 so that the string reflects your main content ID or class name. In the above example that can be either `$area = '#main';` or `$area = '.content';` where a prefix '#' is used for ID and '.' for class. 
+2. Change the source of wp-content/plugins/highlight-search-terms/hlst.php on line 69 so that the string reflects your main content ID or class name. In the above example that can be either `$area = '#main';` or `$area = '.content';` where a prefix '#' is used for ID and '.' for class.
+
+3. Switch to a theme that does abide by the current WordPress conventions :)
 
 As soon as I have found a solution for this issue with FireFox, I will put it in the next release! If anyone has tips for me, please let me know :)    
 
@@ -71,7 +74,7 @@ Many blogs are already top-heavy with all kinds of resource hungry plugins that 
 
 To get you started with your own CSS styling that fits your theme, see the following examples.
 
-= Basic CSS Instructions =
+= CSS Instructions =
 
 Go in your WP admin section to Themes > Edit and find your Stylesheet. Scroll all the way to the bottom and add one of the examples (or your modification of it) on a fresh new line. 
 
@@ -108,7 +111,7 @@ Keep in mind that for the _first_ search term the additional class "term-0" is u
 
 = Known issues =
 
-1. If your theme does not wrap the main content section of your pages in a div with class "hentry", this plugin will not work for you out of the box. However, you can make it work by a simple edit of the plugin file. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for an explanation.
+1. If your theme does not wrap the main content section of your pages in a div with class "hentry", this plugin will not work for you out of the box. However, you _can_ make it work. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for an explanation.
 
 2. [Josh](http://theveganpost.com) pointed out a conflict with the [ShareThis button](http://sharethis.com/wordpress). I have no clue why this happens and have no solution but to resort to an alternative for the ShareThis button _or_ for this highlighter plugin, untill I hear from the ShareThis developers. Sorry. :(
 
