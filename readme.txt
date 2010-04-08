@@ -14,7 +14,7 @@ Highlights search terms using jQuery when referer is a Google, Yahoo or Lycos se
 
 = What does it do? =
 
-This low impact plugin uses only two action hooks, **init** to insert the jQuery library (already included in your WordPress package) and **wp_head** to add a custom jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` and wraps them in `<span class="hilite term-N"> ... </span>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
+This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` and wraps them in `<span class="hilite term-N"> ... </span>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
 
 = What do I need to do? =
 
@@ -111,9 +111,9 @@ Keep in mind that for the _first_ search term the additional class "term-0" is u
 
 = Known issues =
 
-1. If your theme does not wrap the main content section of your pages in a div with class "hentry", this plugin will not work for you out of the box. However, you _can_ make it work. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for an explanation.
+1. If your theme does not wrap the main content section of your pages in a div with class "hentry", this plugin will not work for you out of the box. However, you can _make_ it work. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for an explanation.
 
-2. [Josh](http://theveganpost.com) pointed out a conflict with the [ShareThis button](http://sharethis.com/wordpress). I have no clue why this happens and have no solution but to resort to an alternative for the ShareThis button _or_ for this highlighter plugin, untill I hear from the ShareThis developers. Sorry. :(
+2. [Josh](http://theveganpost.com) pointed out a conflict with the [ShareThis button](http://sharethis.com/wordpress). I have no clue why this happens but since version 0.5 jQuery is used in so called NoConflict mode. Please let me know if the problem still exists. Thanks!
 
 Thank you, [Jason](http://wordpress.org/support/profile/412612) for pointing out a bug for IE7+, fixed in 0.2. 
 
@@ -121,18 +121,28 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 == Changelog ==
 
+= 0.5 =
+Date:
+
+* using jQuery in no-conflict mode and $hlst instead of $ to avoid conflict with prototype
+* split variables and moved js extention to static file
+* moved jQuery and extention to footer + only when actually needed for faster pageload
+
 = 0.4 =
 Date: 2010-04-07
-- fixed Regular Expression to allow parts of words to be highlighted
-- search term wrapping limited to .hentry divs
+
+* fixed Regular Expression to allow parts of words to be highlighted
+* search term wrapping limited to .hentry divs
 
 = 0.3 =
 Date: 2009-04-16
-- Bugfix for Firefox 2+ (forcefully highlights now limited to div#content)
+
+* Bugfix for Firefox 2+ (forcefully highlights now limited to div#content)
 
 = 0.2 =
 Date: 2009-04-15
-- Allowing for multiple search term styling + Bugfix for IE7 / IE8
+
+* Allowing for multiple search term styling + Bugfix for IE7 / IE8
 
 = 0.1 =
 Date: 2009-04-14
