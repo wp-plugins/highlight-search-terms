@@ -70,7 +70,7 @@ As soon as I have found a solution for this issue with FireFox, I will put it in
 
 == Other Notes ==
 
-Many blogs are already top-heavy with all kinds of resource hungry plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible. This is done by going without any back-end options page and no extra database entries. Just two action hooks are used: init and wp_head. The rest is done by jQuery javascript extention and your own CSS.
+Many blogs are already top-heavy with all kinds of resource hungry plugins that require a lot of options to be set and subsequently more database queries. The Highlight Search Terms plugin for WordPress is constructed to be as low impact / low resource demanding as possible, keeping server response and page load times low. This is done by going without any back-end options page, no filtering of post content and no extra database entries. Just two action hooks are used: wp_footer and wp_head. The rest is done by jQuery javascript extention and your own CSS.
 
 To get you started with your own CSS styling that fits your theme, see the following examples.
 
@@ -125,7 +125,7 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 Date:
 
 * using jQuery in no-conflict mode and $hlst instead of $ to avoid conflict with prototype
-* split variables and moved js extention to static file
+* split variables and moved js extention in compacted form to static file
 * moved jQuery and extention to footer + only when actually needed for faster pageload
 
 = 0.4 =
