@@ -122,6 +122,7 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 == Changelog ==
 
 = 0.5 =
+
 Date:
 
 * using jQuery in no-conflict mode and $hlst instead of $ to avoid conflict with prototype
@@ -129,22 +130,26 @@ Date:
 * moved jQuery and extention to footer + only when actually needed for faster pageload
 
 = 0.4 =
+
 Date: 2010-04-07
 
 * fixed Regular Expression to allow parts of words to be highlighted
 * search term wrapping limited to .hentry divs
 
 = 0.3 =
+
 Date: 2009-04-16
 
 * Bugfix for Firefox 2+ (forcefully highlights now limited to div#content)
 
 = 0.2 =
+
 Date: 2009-04-15
 
 * Allowing for multiple search term styling + Bugfix for IE7 / IE8
 
 = 0.1 =
+
 Date: 2009-04-14
 - Basic plugin aimed at low impact / low resource demand on your WP installation using client side javascript.
 
