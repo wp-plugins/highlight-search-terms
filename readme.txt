@@ -25,7 +25,7 @@ In most up to date themes (including WP's own Default theme) post and page conte
 
 == Installation ==
 
-To make it work, you will need to take two steps. (I) A normal installation and activation procedure _and_ (II) editing your Theme Stylesheet to contain your personal highlight styling rules.
+To make it work, you will need to take two steps. **(I)** A normal installation and activation procedure _and_ **(II)** editing your Theme Stylesheet to contain your personal highlight styling rules.
 
 **I.** Use the slick search and install feature (Plugins -> Add New) in your WP2.7+ admin section _or_ follow these basic steps.
 
@@ -41,17 +41,17 @@ Please find more examples under the [Other Notes](http://wordpress.org/extend/pl
 
 == Frequently Asked Questions ==
 
-**Q: I do not see any highlighting!**
+= I do not see any highlighting! =
 
-**A:** This plugin has _no_ configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling that fits your theme.
+This plugin has _no_ configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling that fits your theme.
 
-**Q: I have no idea what to put in my stylesheet. Can you give me some examples?**
+= I have no idea what to put in my stylesheet. Can you give me some examples? =
 
-**A:** Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) for instructions and some examples to get you started.
+Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) for instructions and some examples to get you started.
 
-**Q: I _STILL_ do not see any highlighting!**
+= I _STILL_ do not see any highlighting! =
 
-**A:** Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. However, in your particular theme, that might be different... 
+Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. However, in your particular theme, that might be different... 
 
 Let's suppose your theme's index.php or single.php has no `<div <?php post_class() ?> ... >` but wraps the post/page content in a `<div id="main" class="content"> ... </div>`. You can do two things to solve this:
 
@@ -122,19 +122,27 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 == Changelog ==
 
 = 0.4 =
+
 Date: 2010-04-07
+
 - fixed Regular Expression to allow parts of words to be highlighted
 - search term wrapping limited to .hentry divs
 
 = 0.3 =
+
 Date: 2009-04-16
+
 - Bugfix for Firefox 2+ (forcefully highlights now limited to div#content)
 
 = 0.2 =
+
 Date: 2009-04-15
+
 - Allowing for multiple search term styling + Bugfix for IE7 / IE8
 
 = 0.1 =
+
 Date: 2009-04-14
+
 - Basic plugin aimed at low impact / low resource demand on your WP installation using client side javascript.
 
