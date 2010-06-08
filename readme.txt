@@ -41,17 +41,17 @@ Please find more examples under the [Other Notes](http://wordpress.org/extend/pl
 
 == Frequently Asked Questions ==
 
-**Q: I do not see any highlighting!**
+= I do not see any highlighting! =
 
-**A:** This plugin has _no_ configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling that fits your theme.
+This plugin has _no_ configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling that fits your theme.
 
-**Q: I have no idea what to put in my stylesheet. Can you give me some examples?**
+= I have no idea what to put in my stylesheet. Can you give me some examples? =
 
-**A:** Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) for instructions and some examples to get you started.
+Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) for instructions and some examples to get you started.
 
-**Q: I _STILL_ do not see any highlighting!**
+= I _STILL_ do not see any highlighting! =
 
-**A:** Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. However, in your particular theme, that might be different... 
+Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. However, in your particular theme, that might be different... 
 
 Let's suppose your theme's index.php or single.php has no `<div <?php post_class() ?> ... >` but wraps the post/page content in a `<div id="main" class="content"> ... </div>`. You can do two things to solve this:
 
