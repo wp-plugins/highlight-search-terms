@@ -16,11 +16,17 @@ Highlights search terms using jQuery when referer is a Google, Yahoo or Lycos se
 
 This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` and wraps them in `<span class="hilite term-N"> ... </span>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
 
-= What do I need to do? =
+= What does it NOT do? =
 
-There are _no_ configuration options and there is _no_ predefined highlight styling. You are completely free to define any CSS styling rules in your themes Stylesheet, style.css, to get a result that fits your theme best. You can find basic instructions and CSS examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
+There are no CSS style rules set for highlighting. You are free to use any styling you wish but you absolutely *need to define at least one rule* to make the highlights visible. 
 
-In most up to date themes (including WP's own Default theme) post and page content is shown inside a div with class `hentry`. This means only search terms found in post and page content are highlighted. Not search terms that accidentaly show in the page header, sidebar or footer. If your current theme does not do this (yet) this plugin will not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
+= So what do I need to do? =
+
+**1. Define CSS rules**
+There are _no_ configuration options and there is _no_ predefined highlight styling. You are completely free to define any CSS styling rules in your themes **main stylesheet (style.css)** or use any **Custom CSS plugin** to get a result that fits your theme best. You can find basic instructions and CSS examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
+
+**2. Check your theme**
+In most up to date themes (including WP's own Default theme) post and page content is shown inside a div with class `hentry`. This means search terms found in post and page content will be highlighted but not similar terms that accidentaly show in the page header, sidebar or footer. If your current theme does not use the `hentry` class (yet), this plugin will not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
 
 
 == Installation ==
@@ -45,6 +51,8 @@ Please find more examples under the [Other Notes](http://wordpress.org/extend/pl
 = I do not see any highlighting! =
 
 This plugin has _no_ configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling that fits your theme.
+
+Don't want to edit your themes stylesheet? I can highly recommend Automattics own [Custom CSS](http://wordpress.org/extend/plugins/safecss/) plugin!
 
 = I have no idea what to put in my stylesheet. Can you give me some examples? =
 
