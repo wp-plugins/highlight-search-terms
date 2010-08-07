@@ -1,6 +1,6 @@
 === Highlight Search Terms ===
 Contributors: RavanH
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=0%2e4&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=ravanhagen%40gmail%2ecom&amp;item_name=Highlight%20Search%20Terms&amp;item_number=0%2e4&amp;no_shipping=0&amp;tax=0&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8
 Tags: search, search term, highlight, hilite, google, yahoo, lycos, jquery, javascript
 Requires at least: 2.3
 Tested up to: 3.0.1
@@ -33,13 +33,13 @@ In most up to date themes (including WP's own Default theme) post and page conte
 
 To make it work, you will need to take two steps. (I) A normal installation and activation procedure _and_ (II) editing your Theme Stylesheet to contain your personal highlight styling rules.
 
-**I.** Use the slick search and install feature (Plugins -> Add New) in your WP2.7+ admin section _or_ follow these basic steps.
+**I.** [Install now](http://coveredwebservices.com/wp-plugin-install/?plugin=highlight-search-terms) _or_ use the slick search and install feature (Plugins > Add New and search for "highlight search terms") in your WP2.7+ admin section _or_ follow these basic steps.
 
-- Download archive and unpack.
-- Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
-- Activate plugin on the Plug-ins page
+1. Download archive and unpack.
+2. Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
+3. Activate plugin on the Plug-ins page
 
-**II.** Add at least _one_ new rule to your themes styleheet (style.css) to style highlightable text. 
+**II.** Add at least _one_ new rule to your themes styleheet (style.css or a custom stylsheet) to style highlightable text. 
 
 For example use `.hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with class "hentry").
 
