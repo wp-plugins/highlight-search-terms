@@ -6,7 +6,7 @@ Requires at least: 2.3
 Tested up to: 2.9.2
 Stable tag: 0.4
 
-Lightweight search terms highlighter using jQuery to wrap search terms with span tags when referer is a search engine or within wp search results using jQuery. No options to set, just add a CSS rule for class "hilite" to your stylesheet to make the highlights show up any way you want them to.
+Lightweight search terms highlighter using jQuery. Wraps search terms with span tags (with class "hilite") when referer is a search engine or within wp search results.
 
 == Description ==
 
@@ -38,6 +38,7 @@ To make it work, you will need to take two steps. (I) A normal installation and 
 For example use `.hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with class "hentry").
 
 Please find more examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
+
 
 == Frequently Asked Questions ==
 
@@ -123,7 +124,7 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 = 0.5 =
 
-Date:
+Date: 2010-08-07
 
 * using jQuery in no-conflict mode and $hlst instead of $ to avoid conflict with prototype
 * split variables and moved js extention in compacted form to static file
@@ -153,3 +154,7 @@ Date: 2009-04-15
 Date: 2009-04-14
 - Basic plugin aimed at low impact / low resource demand on your WP installation using client side javascript.
 
+== Upgrade Notice ==
+
+= 0.5 =
+Speed improvements: Packed Javascript + script in footer and ONLY when needed. BUGFIX: Prototype conflict.
