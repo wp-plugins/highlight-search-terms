@@ -63,7 +63,7 @@ function hlst_query() {
 		'#main',	// used or common outer wrapper div ids.
 		'div.content',	// When referencing an ID name, just be sure to begin with a '#'.
 		'#middle',	// When referencing a class name, try to put the tag in front, followed
-		'#container',	// by a '.' and then the class name to improve script speed.
+		'#container',	// by a '.' and then the class name to **improve script speed**.
 		'#wrapper',	// Example: div.hentry
 		);		// Using the tag 'body' is known to cause conflicts.
 			
