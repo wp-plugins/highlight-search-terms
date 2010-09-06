@@ -62,6 +62,7 @@ function hlst_query() {
 		'#content',
 		'#main',
 		'.content',
+		'#middle',
 		'#container',
 		'#wrapper',
 		);		// Change or extend this to match themes content div ID or classes.
