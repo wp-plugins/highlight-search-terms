@@ -1,20 +1,22 @@
 === Highlight Search Terms ===
 Contributors: RavanH
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=ravanhagen%40gmail%2ecom&amp;item_name=Highlight%20Search%20Terms&amp;item_number=0%2e4&amp;no_shipping=0&amp;tax=0&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8
-Tags: search, search term, highlight, hilite, google, yahoo, lycos, jquery, javascript
+Tags: search, search term, highlight, hilite, google, yahoo, lycos, bing, ask, baidu, youdao, search engine, keyword, jquery, javascript
 Requires at least: 2.3
 Tested up to: 3.0.1
-Stable tag: 0.5
+Stable tag: 0.6
 
 Lightweight search terms highlighter using jQuery. Wraps search terms with span tags (with class "hilite") when referer is a search engine or within wp search results.
 
 == Description ==
 
-Highlights search terms using jQuery when referer is a Google, Yahoo or Lycos search engine _or_ within WordPress generated search results. This plugin is a light weight, low resource demanding and very simple fusion between <a href="http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/">How to Highlight Search Terms with jQuery - theme hack by Thaya Kareeson</a> and <a href="http://wordpress.org/extend/plugins/google-highlight/">Search Hilite by Ryan Boren</a>.
+Highlights search terms using jQuery when referer is a Google, Yahoo, Lycos, Bing, Ask, Baidu and Youdao search engine _or_ within WordPress generated search results. This plugin is a light weight, low resource demanding and very simple fusion between <a href="http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/">How to Highlight Search Terms with jQuery - theme hack by Thaya Kareeson</a> and <a href="http://wordpress.org/extend/plugins/google-highlight/">Search Hilite by Ryan Boren</a>.
+
+**NOTE:** You will NOT see any highlighting until you defined a CSS hilite styling! Read on below **So what do I need to do?** and [Installation](http://wordpress.org/extend/plugins/highlight-search-terms/installation/) for more detailed instructions. You can find CSS examples in [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/).
 
 = What does it do? =
 
-This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` and wraps them in `<span class="hilite term-N"> ... </span>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
+This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` (or ID `content`, `main` or `wrapper`) and wraps them in `<span class="hilite term-N"> ... </span>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
 
 = What does it NOT do? =
 
@@ -23,15 +25,15 @@ There are no CSS style rules set for highlighting. You are free to use any styli
 = So what do I need to do? =
 
 **1. Define CSS rules**
-There are _no_ configuration options and there is _no_ predefined highlight styling. You are completely free to define any CSS styling rules in your themes **main stylesheet (style.css)** or use any **Custom CSS plugin** to get a result that fits your theme best. You can find basic instructions and CSS examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
+There are _no_ configuration options and there is _no_ predefined highlight styling. You are completely free to define any CSS styling rules in your themes **main stylesheet (style.css)** or use any **Custom CSS plugin** like [Custom CSS](http://wordpress.org/extend/plugins/safecss/) to get a result that fits your theme best. You can find basic instructions and CSS examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
 
 **2. Check your theme**
-In most up to date themes (including WP's own Default theme) post and page content is shown inside a div with class `hentry`. This means search terms found in post and page content will be highlighted but not similar terms that accidentaly show in the page header, sidebar or footer. If your current theme does not use the `hentry` class (yet), this plugin will not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
+In most up to date themes (including WP's own Default theme) post and page content is shown inside a div with class `hentry`. This means search terms found in post and page content will be highlighted but not similar terms that accidentaly show in the page header, sidebar or footer. If your current theme does not use the `hentry` class (yet), this plugin will look for IDs `content`, `main` and finally `wrapper` but if none of those are found, it not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
 
 
 == Installation ==
 
-To make it work, you will need to take two steps. (I) A normal installation and activation procedure _and_ (II) editing your Theme Stylesheet to contain your personal highlight styling rules.
+To make it work, you will need to take **two steps**! (I) A normal installation and activation procedure _and_ (II) adding CSS styling rules to get highlighting to fit your theme. Without that last step, you will not see any hilites.
 
 **I.** [Install now](http://coveredwebservices.com/wp-plugin-install/?plugin=highlight-search-terms) _or_ use the slick search and install feature (Plugins > Add New and search for "highlight search terms") in your WP2.7+ admin section _or_ follow these basic steps.
 
@@ -39,7 +41,7 @@ To make it work, you will need to take two steps. (I) A normal installation and 
 2. Upload (and overwrite) the /highlight-search-terms/ folder and its content to the /plugins/ folder. 
 3. Activate plugin on the Plug-ins page
 
-**II.** Add at least _one_ new rule to your themes styleheet (style.css or a custom stylsheet) to style highlightable text. 
+**II.** Add at least _one_ new rule to your themes styleheet (style.css or a custom stylsheet or a custom css plugin) to style highlightable text. 
 
 For example use `.hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with class "hentry").
 
@@ -60,17 +62,15 @@ Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search
 
 = I _STILL_ do not see any highlighting! =
 
-Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. However, in your particular theme, that might be different... 
+Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. If that is not available, the script will look for divs #content then #main then #wrapper. However, in your particular theme, none of these divs might be available... 
 
-Let's suppose your theme's index.php or single.php has no `<div <?php post_class() ?> ... >` but wraps the post/page content in a `<div id="main" class="content"> ... </div>`. You can do two things to solve this:
+Let's suppose your theme's index.php or single.php has no `<div <?php post_class() ?> ... >` but wraps the post/page content in a `<div id="common" class="content"> ... </div>`. You can do two things to solve this:
 
-1. Change your theme and stylesheet so the post/page content div has either `class="hentry"` or `<?php post_class() ?>`. TIP: Take a look at how it is done in the Default theme included in each WordPress release. But this might involve some real timeconsuming tinkering with your stylesheet and several theme template files.
+A. Change your theme and stylesheet so the post/page content div has either `class="hentry"` or `<?php post_class() ?>`. TIP: Take a look at how it is done in the Default theme included in each WordPress release. But this might involve some real timeconsuming tinkering with your stylesheet and several theme template files.
 
-2. Change the source of wp-content/plugins/highlight-search-terms/hlst.php on line 69 so that the string reflects your main content ID or class name. In the above example that can be either `$area = '#main';` or `$area = '.content';` where a prefix '#' is used for ID and '.' for class.
+B. Change the source of wp-content/plugins/highlight-search-terms/hlst.php on line 61 so that the array contains your main content ID or class name. In the above example that can be either `'#common',` or `'.content',` where a prefix '#' is used for ID and '.' for class.
 
-3. Switch to a theme that does abide by the current WordPress conventions :)
-
-As soon as I have found a solution for this issue with FireFox, I will put it in the next release! If anyone has tips for me, please let me know :)    
+C. Switch to a theme that does abide by the current WordPress conventions :)
 
 
 == Screenshots ==
@@ -130,6 +130,14 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 == Changelog ==
 
+= 0.6 =
+
+Date: 2010-09-06
+
+* added Bing, Ask, Baidu and Youdao search engines
+* now automatically check for and highlights in multiple theme div areas
+* BUGFIX: cloning first result excerpt to all excerpts
+
 = 0.5 =
 
 Date: 2010-08-07
@@ -164,5 +172,5 @@ Date: 2009-04-14
 
 == Upgrade Notice ==
 
-= 0.5 =
-Speed improvements: Packed Javascript + script in footer and ONLY when needed. BUGFIX: Prototype conflict.
+= 0.6 =
+Now also supports Bing, Ask, Baidu and Youdao search engines. Automatically check for and highlights in multiple theme div areas (working from the inside out). Cloning bug fixed.

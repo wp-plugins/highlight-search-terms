@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://4visions.nl/en/wordpress-plugins/highlight-search-terms
 Description: Highlights search terms when referer is a search engine or within wp search results using jQuery. No options to set, just add a CSS rule for class "hilite" to your stylesheet to make the highlights show up any way you want them to. Example: ".hilite { background-color:yellow }" Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and more examples. <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=ravanhagen%40gmail%2ecom&amp;item_name=Highlight%20Search%20Terms&amp;item_number=0%2e5&amp;no_shipping=0&amp;tax=0&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8" title="Thank you!">Tip jar</a>.
-Version: 0.5
+Version: 0.6
 Author: RavanH
 Author URI: http://4visions.nl/
 */
@@ -29,13 +29,12 @@ Author URI: http://4visions.nl/
     program into proprietary programs.
 */
 
-
 /*
     For Installation instructions, usage, revision history and other info: see readme.txt included in this package
 */
 
 // -- GLOBALS -- //
-define('HLST_VERSION','0.5');
+define('HLST_VERSION','0.6');
 
 // -- FUNCTIONS -- //
 
@@ -44,8 +43,8 @@ function hlst_get_search_query() {
 	$referer = urldecode($_SERVER['HTTP_REFERER']);
 	$query_array = array();
 
-	if ( preg_match('@^http://(.*)?\.?(google|yahoo|lycos).*@i', $referer) ) {
-		$query =  preg_replace('/^.*(&q|query|p)=([^&]+)&?.*$/i','$2', $referer);
+	if ( preg_match('@^http://(.*)?\.?(google|yahoo|lycos|bing|ask|baidu|youdao).*@i', $referer) ) {
+		$query =  preg_replace('/^.*(&q|query|p|wd)=([^&]+)&?.*$/i','$2', $referer);
 	} else {
 		$query = get_search_query();
 	}
@@ -54,19 +53,25 @@ function hlst_get_search_query() {
 	return $query_array[0];
 }
 
-// Set style (modify this to fit your need and uncomment the add_action hook at the bottom when you do not want to edit your style.css)
-function hlst_style() {
-	$bgclr = '#9CD4FF'; // moss:#D3E18A ; lightblue:#9CD4FF; orange:#FFCA61
-	echo '
-<style type="text/css" media="screen"> .hilite { background:'.$bgclr.'; } </style>
-';
-}
-
 // Get query variables 
 function hlst_query() {
 	global $hlst_do_extend;
 
-	$area = '.hentry'; // change this to your themes content div ID (starting with #) or class (starting with .)
+	$areas = array(
+		'.hentry',
+		'#content',
+		'#main',
+		'.content',
+		'#container',
+		'#wrapper',
+		);		// Change or extend this to match themes content div ID or classes.
+				// Hilite script will test div ids/classes and use the first one it
+				// finds so put the most common one first, then follow with the less
+				// used or common outer wrapper div ids
+
+	// js >> var hlst_ids = new Array("'.$id'","#main","#wrapper");
+	//$bgclr = '#D3E18A';	// default moss background 
+				// dark orange:#9CD4FF; lightblue:#9CD4FF; light orange:#FFCA61
 
 	$terms = hlst_get_search_query();
 	$filtered = array();
@@ -79,14 +84,11 @@ function hlst_query() {
 	if (count($filtered) > 0) { 
 		$hlst_do_extend = true;
 		echo '
-<!-- Highlight Search Terms plugin ( RavanH - http://4visions.nl/ ) -->
+<!-- Highlight Search Terms ' . HLST_VERSION . ' ( RavanH - http://4visions.nl/en/wordpress-plugins/highlight-search-terms/ ) -->
 <script type="text/javascript">
-/* <![CDATA[ */
-var hlst_query = new Array(' . implode(",",$filtered) . ');
-var hlst_area = "' . $area . '";
-/* ]]> */
+var hlst_query = new Array(' . implode(',',$filtered) . ');
+var hlst_areas = new Array("' . implode('","',$areas) . '");
 </script>
-<!-- end Highlight Search Terms -->
 ';
 	}
 } 
@@ -96,30 +98,17 @@ function hlst_extend() {
 	global $hlst_do_extend;
 
 	if ($hlst_do_extend) {
+		wp_register_script('hlst-extend', plugins_url('hlst-extend.js', __FILE__), array('jquery'), HLST_VERSION, true);
 
-	wp_register_script('hlst-extend', plugins_url('hlst-extend.js', __FILE__), array('jquery'), HLST_VERSION, true);
- 
-	wp_print_scripts('hlst-extend');
-
-/*
-Took out the \\b off the var regex variable, to match the term any where in the text - not just at a word boundary.
-old:
-var regex = new RegExp('(<[^>]*>)|(\\b'+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', insensitive ? 'ig' : 'g');
-new:
-var regex = new RegExp('(<[^>]*>)|('+ search.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', insensitive ? 'ig' : 'g');
-*/
+		wp_print_scripts('hlst-extend');
 	}
-} 
+}
 
 // -- HOOKING INTO WP -- //
 
 // Set query string as js variable in header
-add_action('wp_head', 'hlst_query');
+add_action('wp_head', 'hlst_query', 5);
 
 // Extend jQ in footer
 add_action('wp_footer', 'hlst_extend');
 
-//Add CSS (uncomment the line below to append CSS styling without editing your style.css)
-//add_action('wp_print_styles', 'hlst_style');
-
-?>
