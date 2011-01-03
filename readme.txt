@@ -3,10 +3,11 @@ Contributors: RavanH
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=ravanhagen%40gmail%2ecom&amp;item_name=Highlight%20Search%20Terms&amp;item_number=0%2e6&amp;no_shipping=0&amp;tax=0&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8
 Tags: search, search term, highlight, hilite, google, yahoo, lycos, bing, ask, baidu, youdao, search engine, keyword, jquery, javascript
 Requires at least: 2.3
-Tested up to: 3.0.1
+Tested up to: 3.1
 Stable tag: 0.6
 
-Lightweight search terms highlighter using jQuery. Wraps search terms with span tags (with class "hilite") when referer is a search engine or within wp search results.
+Lightweight search terms highlighter using jQuery. Wraps search terms with class="hilite" when referer is a search engine or within wp search results.
+
 
 == Description ==
 
@@ -128,7 +129,20 @@ Thank you, [Jason](http://wordpress.org/support/profile/412612) for pointing out
 
 Please provide me with a bugreport, suggestion or question if you run into any problems!
 
+
+== Upgrade Notice ==
+
+= 0.7 =
+Limit highlighted terms to full words.
+
+
 == Changelog ==
+
+= 0.7 =
+
+Date: 2011-01-03
+
+* limit highlited search terms to word boundery
 
 = 0.6 =
 
@@ -169,8 +183,3 @@ Date: 2009-04-15
 
 Date: 2009-04-14
 - Basic plugin aimed at low impact / low resource demand on your WP installation using client side javascript.
-
-== Upgrade Notice ==
-
-= 0.6 =
-Now also supports Bing, Ask, Baidu and Youdao search engines. Automatically check for and highlights in multiple theme div areas (working from the inside out). Cloning bug fixed.

@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://4visions.nl/en/wordpress-plugins/highlight-search-terms
 Description: Highlights search terms when referer is a search engine or within wp search results using jQuery. No options to set, just add a CSS rule for class "hilite" to your stylesheet to make the highlights show up any way you want them to. Example: ".hilite { background-color:yellow }" Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and more examples. <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=0%2e6&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8&lc=us" title="Thank you!">Tip jar</a>.
-Version: 0.6
+Version: 0.7
 Author: RavanH
 Author URI: http://4visions.nl/
 */
@@ -61,10 +61,10 @@ function hlst_query() {
 		'div.hentry',	// The hilite script will test div ids/classes and use the first one it
 		'#content',	// finds so put the most common one first, then follow with the less
 		'#main',	// used or common outer wrapper div ids.
-		'div.content',	// When referencing an ID name, just be sure to begin with a '#'.
-		'#middle',	// When referencing a class name, try to put the tag in front, followed
-		'#container',	// by a '.' and then the class name to **improve script speed**.
-		'#wrapper',	// Example: div.hentry
+		'div.content',	// When referencing an *ID name*, just be sure to begin with a '#'.
+		'#middle',	// When referencing a *class name*, try to put the tag in front,
+		'#container',	// followed by a '.' and then the class name to *improve script speed*.
+		'#wrapper',	// Example: div.hentry instead of just .hentry
 		);		// Using the tag 'body' is known to cause conflicts.
 			
 	// js >> var hlst_ids = new Array("'.$id'","#main","#wrapper");
