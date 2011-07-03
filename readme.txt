@@ -102,7 +102,7 @@ Yellow background highlighting.
 
 A light blue background with bold font.
 
-    .hilite { background-color:#FFCA61; color:#0000 }
+    .hilite { background-color:#FFCA61; color:#000000 }
 
 Orange background with black font.
 

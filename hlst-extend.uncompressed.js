@@ -21,4 +21,5 @@ jQuery(document).ready((function($){
       }
     }
   }
+  if ('function'==typeof Cufon) Cufon.refresh();
 }));
