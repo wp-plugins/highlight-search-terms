@@ -138,16 +138,11 @@ Limit highlighted terms to full words.
 
 == Changelog ==
 
-= 0.7 =
-
-Date: 2011-01-03
-
-* limit highlited search terms to word boundery
-
 = 0.6 =
 
 Date: 2010-09-06
 
+* limit highlited search terms to word boundery
 * added Bing, Ask, Baidu and Youdao search engines
 * now automatically check for and highlights in multiple theme div areas
 * BUGFIX: cloning first result excerpt to all excerpts
