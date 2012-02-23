@@ -3,8 +3,8 @@ Contributors: RavanH
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=ravanhagen%40gmail%2ecom&amp;item_name=Highlight%20Search%20Terms&amp;item_number=0%2e6&amp;no_shipping=0&amp;tax=0&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8
 Tags: search, search term, highlight, hilite, google, yahoo, lycos, bing, ask, baidu, youdao, search engine, keyword, jquery, javascript
 Requires at least: 2.3
-Tested up to: 3.2
-Stable tag: 0.6
+Tested up to: 3.3.1
+Stable tag: 0.7
 
 Lightweight search terms highlighter using jQuery. Wraps search terms with class="hilite" when referer is a search engine or within wp search results.
 
@@ -132,11 +132,17 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 == Upgrade Notice ==
 
-= 0.7 =
-Limit highlighted terms to full words and fix for Cufon rendered text.
+= 0.8 =
+Removed word boundery for non-latin based languages.
 
 
 == Changelog ==
+
+= 0.8 =
+
+Date 2012-02-23
+
+* No more word boundery limit for non-latin based languages compatibility
 
 = 0.7 =
 
