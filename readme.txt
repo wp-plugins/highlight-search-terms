@@ -6,7 +6,7 @@ Requires at least: 2.3
 Tested up to: 3.3.1
 Stable tag: 0.7
 
-Lightweight search terms highlighter using jQuery. Wraps search terms with class="hilite" when referer is a search engine or within wp search results.
+Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when referer is a search engine or within wp search results.
 
 
 == Description ==
