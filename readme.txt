@@ -4,24 +4,24 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=r
 Tags: search, search term, highlight, hilite, google, yahoo, lycos, bing, ask, baidu, youdao, search engine, keyword, jquery, javascript
 Requires at least: 2.3
 Tested up to: 3.3.1
-Stable tag: 0.7
+Stable tag: 0.8
 
 Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when referer is a search engine or within wp search results.
 
 
 == Description ==
 
-Highlights search terms using jQuery when referer is a Google, Yahoo, Lycos, Bing, Ask, Baidu and Youdao search engine _or_ within WordPress generated search results. This plugin is a light weight, low resource demanding and very simple fusion between <a href="http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/">How to Highlight Search Terms with jQuery - theme hack by Thaya Kareeson</a> and <a href="http://wordpress.org/extend/plugins/google-highlight/">Search Hilite by Ryan Boren</a>.
+Highlights search terms using jQuery when referer is a Google, Yahoo, Lycos, Bing, Ask, Baidu and Youdao search engine _or_ within WordPress generated search results. This plugin is a light weight, low resource demanding and very simple fusion between <a href="http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/">How to Highlight Search Terms with jQuery - theme hack by Thaya Kareeson</a> and <a href="http://wordpress.org/extend/plugins/google-highlight/">Search Hilite by Ryan Boren</a>, with some optimisations and adapted to support HTML5.
 
-**NOTE:** You will NOT see any highlighting until you defined a CSS hilite styling! Read on below **So what do I need to do?** and [Installation](http://wordpress.org/extend/plugins/highlight-search-terms/installation/) for more detailed instructions. You can find CSS examples in [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/).
+**NOTE:**  to make the highlights visible in browsers that do not support HTML5 like Internet Explorer 8 or older you will have to define at least one CSS hilite styling! Read on below **So what do I need to do?** and [Installation](http://wordpress.org/extend/plugins/highlight-search-terms/installation/) for more detailed instructions. You can find CSS examples in [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/).
 
 = What does it do? =
 
-This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` (or ID `content`, `main` or `wrapper`) and wraps them in `<span class="hilite term-N"> ... </span>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
+This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` (or ID `content`, `main` or `wrapper`) and wraps them in `<mark class="hilite term-N"> ... </mark>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
 
 = What does it NOT do? =
 
-There are no CSS style rules set for highlighting. You are free to use any styling you wish but you absolutely *need to define at least one rule* to make the highlights visible. 
+There are no CSS style rules set for highlighting. You are free to use any styling you wish but to make the highlights visible in browsers that do not support HTML5 like Internet Explorer 8 or older you absolutely *need to define at least one rule*.
 
 = So what do I need to do? =
 
@@ -34,7 +34,7 @@ In most up to date themes (including WP's own Default theme) post and page conte
 
 == Installation ==
 
-To make it work, you will need to take **two steps**! (I) A normal installation and activation procedure _and_ (II) adding CSS styling rules to get highlighting to fit your theme. Without that last step, you will not see any hilites.
+To make it work, you will need to take **two steps**! (I) A normal installation and activation procedure _and_ (II) adding CSS styling rules to get highlighting for browsers that do not support HTML5 like Internet Explorer 8 or older. Without that last step, visitors using older browsers will not see any hilites.
 
 **I.** [Install now](http://coveredwebservices.com/wp-plugin-install/?plugin=highlight-search-terms) _or_ use the slick search and install feature (Plugins > Add New and search for "highlight search terms") in your WP2.7+ admin section _or_ follow these basic steps.
 
@@ -53,11 +53,11 @@ Please find more examples under the [Other Notes](http://wordpress.org/extend/pl
 
 = I do not see any highlighting! =
 
-This plugin has _no_ configuration options page and there is _no_ predefined highlight styling. You have to complete step II of the installation process for any highliting to become visible. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling that fits your theme.
+This plugin has _no_ configuration options page and there is _no_ predefined highlight styling. For any highliting to become visible in browsers that do not support HTML5 like Internet Explorer 8 or older, you have to complete step II of the installation process. Edit your themes Stylesheet (style.css) to contain a rule that will give you exactly the styling that fits your theme.
 
 Don't want to edit your themes stylesheet? I can highly recommend Automattics own [Custom CSS](http://wordpress.org/extend/plugins/safecss/) plugin!
 
-= I have no idea what to put in my stylesheet. Can you give me some examples? =
+= I want to customise the highlighting but have no idea what to put in my stylesheet. Can you give me some examples? =
 
 Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) for instructions and some examples to get you started.
 
@@ -133,15 +133,16 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 == Upgrade Notice ==
 
 = 0.8 =
-Removed word boundery for non-latin based languages.
+Switch to HTML5 mark tag. Removed word boundery for non-latin based languages.
 
 
 == Changelog ==
 
 = 0.8 =
 
-Date 2012-02-23
+Date 2012-04-18
 
+* HTML5 mark tag support
 * No more word boundery limit for non-latin based languages compatibility
 
 = 0.7 =

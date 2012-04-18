@@ -34,7 +34,7 @@ Author URI: http://4visions.nl/
 */
 
 // -- GLOBALS -- //
-define('HLST_VERSION','0.7');
+define('HLST_VERSION','0.8');
 
 // -- FUNCTIONS -- //
 
