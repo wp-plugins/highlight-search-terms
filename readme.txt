@@ -17,7 +17,7 @@ Highlights search terms using jQuery when referer is a Google, Yahoo, Lycos, Bin
 
 = What does it do? =
 
-This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` (or ID `content`, `main` or `wrapper`) and wraps them in `<mark class="hilite term-N"> ... </mark>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
+This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` (or ID `content`, `main` or `wrapper`) and wraps them in `<mark class="hilite term-N"> ... </mark>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used.
 
 = What does it NOT do? =
 
@@ -61,7 +61,7 @@ Don't want to edit your themes stylesheet? I can highly recommend Automattics ow
 
 Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) for instructions and some examples to get you started.
 
-= I _STILL_ do not see any highlighting! =
+= I still do not see any highlighting! =
 
 Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. If that is not available, the script will look for divs #content then #main then #wrapper. However, in your particular theme, none of these divs might be available... 
 
