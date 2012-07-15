@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://4visions.nl/en/wordpress-plugins/highlight-search-terms
 Description: Wraps search terms in the HTML5 mark tag when referer is a search engine or within wp search results. No options to set. Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and examples for styling the highlights. <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=0%2e6&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8&lc=us" title="Thank you!">Tip jar</a>.
-Version: 0.8
+Version: 0.9alpha
 Author: RavanH
 Author URI: http://4visions.nl/
 */
@@ -29,84 +29,120 @@ Author URI: http://4visions.nl/
     program into proprietary programs.
 */
 
-/*
-    For Installation instructions, usage, revision history and other info: see readme.txt included in this package
-*/
+if(!empty($_SERVER['SCRIPT_FILENAME']) && basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME']))
+	die('You can not access this page directly!');
 
-// -- GLOBALS -- //
-define('HLST_VERSION','0.8');
+/* --------------------
+ *      CONSTANTS
+ * -------------------- */
 
-// -- FUNCTIONS -- //
+define('HLST_VERSION','0.9');
 
-// Get search term
-function hlst_get_search_query() {
-	$referer = urldecode($_SERVER['HTTP_REFERER']);
-	$query_array = array();
+/* -----------------
+ *      CLASS
+ *
+ * Thanks go to Scribu, the Jedi Master, and his teachings
+ * on http://scribu.net/wordpress/optimal-script-loading.html
+ *
+ * ----------------- */
 
-	if ( preg_match('@^http://(.*)?\.?(google|yahoo|lycos|bing|ask|baidu|youdao).*@i', $referer) ) {
-		$query =  preg_replace('/^.*(&q|query|p|wd)=([^&]+)&?.*$/i','$2', $referer);
-	} else {
-		$query = get_search_query();
+class HighlightSearchTerms {
+
+	/**
+	* Plugin variables
+	*/
+
+	protected static $do_extend;
+
+	/**
+	* Plugin functions
+	*/
+
+	public static function init() {
+		// -- HOOKING INTO WP -- //
+		add_action('init', array(__CLASS__, 'register_script'));
+		
+		// Set query string as js variable in header
+		add_action('wp_head', array(__CLASS__, 'query') );
+
+		// Extend jQ in footer
+		add_action('wp_footer', array(__CLASS__, 'extend') );
 	}
-	preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $query, $query_array);
 
-	return $query_array[0];
-}
-
-// Get query variables 
-function hlst_query() {
-	global $hlst_do_extend;
-
-	$areas = array(		// Change or extend this to match themes content div ID or classes.
-		'div.hentry',	// The hilite script will test div ids/classes and use the first one it
-		'#content',	// finds so put the most common one first, then follow with the less
-		'#main',	// used or common outer wrapper div ids.
-		'div.content',	// When referencing an *ID name*, just be sure to begin with a '#'.
-		'#middle',	// When referencing a *class name*, try to put the tag in front,
-		'#container',	// followed by a '.' and then the class name to *improve script speed*.
-		'#wrapper',	// Example: div.hentry instead of just .hentry
-		);		// Using the tag 'body' is known to cause conflicts.
+	public static function register_script() {		
+		wp_register_script('hlst-extend', plugins_url('hlst-extend.js', __FILE__), array('jquery'), HLST_VERSION, true);
+	}
+	
+	// Get query variables and print header script
+	public static function query() {
 			
-	// js >> var hlst_ids = new Array("'.$id'","#main","#wrapper");
-	//$bgclr = '#D3E18A';	// default moss background 
-				// dark orange:#9CD4FF; lightblue:#9CD4FF; light orange:#FFCA61
+		$areas = array(		// Change or extend this to match themes content div ID or classes.
+			'div.hentry',	// The hilite script will test div ids/classes and use the first one it
+			'#content',	// finds so put the most common one first, then follow with the less
+			'#main',	// used or common outer wrapper div ids.
+			'div.content',	// When referencing an *ID name*, just be sure to begin with a '#'.
+			'#middle',	// When referencing a *class name*, try to put the tag in front,
+			'#container',	// followed by a '.' and then the class name to *improve script speed*.
+			'#wrapper'	// Example: div.hentry instead of just .hentry
+			);		// Using the tag 'body' is known to cause conflicts.
 
-	$terms = hlst_get_search_query();
-	$filtered = array();
-	foreach($terms as $term){
-		$term = attribute_escape(trim(str_replace(array('"','\'','%22'), '', $term)));
-		if ( !empty($term) ){
-			$filtered[] = '"'.$term.'"';
+		$terms = self::get_search_query();
+		if ( false == $terms) {
+			self::$do_extend = false;
+			return;
 		}
-	}	
-	if (count($filtered) > 0) { 
-		$hlst_do_extend = true;
-		echo '
+	
+		$filtered = array();
+		foreach($terms as $term) {
+			$term = esc_attr(trim(str_replace(array('"','\'','%22'), '', $term)));
+			if ( !empty($term) && strrpos($term,"site:") === false ) {
+				$filtered[] = '"'.$term.'"';
+			}
+		}
+
+		/*if (strrpos($filtered[0],"https://")&&!isset($filtered[1])) {
+			self::$do_extend = false;
+			echo '
+<!-- Highlight Search Terms ' . HLST_VERSION . ' ( RavanH - http://4visions.nl/en/wordpress-plugins/highlight-search-terms/ ) -->
+<!-- Referrer uses SSL. Search terms could not be determined. -->
+';
+		} else*/
+		if (count($filtered) > 0) { 
+			self::$do_extend = true;
+			echo '
 <!-- Highlight Search Terms ' . HLST_VERSION . ' ( RavanH - http://4visions.nl/en/wordpress-plugins/highlight-search-terms/ ) -->
 <script type="text/javascript">
 var hlst_query = new Array(' . implode(',',$filtered) . ');
 var hlst_areas = new Array("' . implode('","',$areas) . '");
 </script>
 ';
+		} else {
+			self::$do_extend = false;
+		}
+	} 
+	
+	// Extend jQ 
+	public static function extend() {
+		if ( self::$do_extend )
+			wp_print_scripts('hlst-extend');
 	}
-} 
+	
+	// Get search term
+	protected static function get_search_query() {
+		$referer = isset($_SERVER['HTTP_REFERER']) ? urldecode($_SERVER['HTTP_REFERER']) : false;
+		$search = get_search_query(false);
+		$query_array = array();
 
-// Extend jQ 
-function hlst_extend() {
-	global $hlst_do_extend;
-
-	if ($hlst_do_extend) {
-		wp_register_script('hlst-extend', plugins_url('hlst-extend.js', __FILE__), array('jquery'), HLST_VERSION, true);
-
-		wp_print_scripts('hlst-extend');
+		if ( $search ) {
+			$found = preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $query_array);
+		} elseif ( $referer && preg_match('@^http(s)?://(.*)?\.?(google|yahoo|lycos|bing|ask|baidu|youdao).*@i', $referer) ) {
+			$found = preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', preg_replace('/^.*(&q|query|p|wd)=([^&]+)&?.*$/i','$2', $referer), $query_array);
+		}
+		
+		return !empty($found) && isset($query_array[0]) && $query_array[0][0] != $referer ? $query_array[0] : false;
 	}
+
 }
 
-// -- HOOKING INTO WP -- //
-
-// Set query string as js variable in header
-add_action('wp_head', 'hlst_query', 5);
-
-// Extend jQ in footer
-add_action('wp_footer', 'hlst_extend');
+HighlightSearchTerms::init();
 

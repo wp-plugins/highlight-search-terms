@@ -3,7 +3,7 @@ Contributors: RavanH
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=ravanhagen%40gmail%2ecom&amp;item_name=Highlight%20Search%20Terms&amp;item_number=0%2e6&amp;no_shipping=0&amp;tax=0&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8
 Tags: mark, highlight, hilite, search, term, terms, jquery
 Requires at least: 2.3
-Tested up to: 3.3.1
+Tested up to: 3.4.1
 Stable tag: 0.8
 
 Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when referer is a search engine or within wp search results.
@@ -17,7 +17,7 @@ Highlights search terms using jQuery when referer is a Google, Yahoo, Lycos, Bin
 
 = What does it do? =
 
-This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` (or ID `content`, `main` or `wrapper`) and wraps them in `<mark class="hilite term-N"> ... </mark>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. A (part of a) search phrase wrapped in quotes is considered as a single term.
+This low impact plugin uses only two action hooks, **wp_header** where it needs to define some variables and **wp_footer** to insert the jQuery library (included in your WordPress package; only if not already loaded) and to add the hilite jQuery extension to your page source code. The jQuery extension that runs after the page has loaded, finds all search terms on that page inside each div with class `hentry` (or ID `content`, `main` or `wrapper`) and wraps them in `<mark class="hilite term-N"> ... </mark>` tags. Note that N is a number starting with 0 for the first term used in the search phrase increasing 1 for each additional term used. Any part of a search phrase wrapped in quotes is considered as a single term.
 
 = What does it NOT do? =
 
@@ -61,7 +61,7 @@ Don't want to edit your themes stylesheet? I can highly recommend Automattics ow
 
 Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) for instructions and some examples to get you started.
 
-= I _STILL_ do not see any highlighting! =
+= I still do not see any highlighting! =
 
 Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. If that is not available, the script will look for divs #content then #main then #wrapper. However, in your particular theme, none of these divs might be available... 
 
@@ -125,6 +125,8 @@ Keep in mind that for the _first_ search term the additional class "term-0" is u
 
 2. [Josh](http://theveganpost.com) pointed out a conflict with the [ShareThis button](http://sharethis.com/wordpress). I have no clue why this happens but since version 0.5 jQuery is used in so called NoConflict mode. Please let me know if the problem still exists. Thanks!
 
+3. When search engine referrer is using SSL (notice the https:// in the URL, usually when logged in as Google user) and the WordPress site is not, then search terms cannot be determined.
+
 Thank you, [Jason](http://wordpress.org/support/profile/412612) for pointing out a bug for IE7+, fixed in 0.2. 
 
 Please provide me with a bugreport, suggestion or question if you run into any problems!
@@ -132,11 +134,19 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 == Upgrade Notice ==
 
-= 0.8 =
-Switch to HTML5 mark tag. Removed word boundery for non-latin based languages.
+= 0.9 =
 
 
 == Changelog ==
+
+= 0.9 =
+
+Date 2012-
+
+* implement as Class
+* Search terms wrapped in qoutes now considered as single term
+* site:domain.ext now stripped from Google searches
+* plugin speed improvements
 
 = 0.8 =
 
