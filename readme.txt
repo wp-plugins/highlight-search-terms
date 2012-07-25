@@ -11,7 +11,9 @@ Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when
 
 == Description ==
 
-Highlights search terms using jQuery when referer is a Google, Yahoo, Lycos, Bing, Ask, Baidu and Youdao search engine _or_ within WordPress generated search results. This plugin is a light weight, low resource demanding and very simple fusion between <a href="http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/">How to Highlight Search Terms with jQuery - theme hack by Thaya Kareeson</a> and <a href="http://wordpress.org/extend/plugins/google-highlight/">Search Hilite by Ryan Boren</a>, with some optimisations and adapted to support HTML5.
+Highlights search terms using jQuery when referer is a Google, Bing, Yahoo, Lycos, Ask, AOL, Baidu, Youdao and many more search engine _or_ within WordPress generated search results. This plugin is a light weight, low resource demanding and very simple fusion between <a href="http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/">How to Highlight Search Terms with jQuery - theme hack by Thaya Kareeson</a> and <a href="http://wordpress.org/extend/plugins/google-highlight/">Search Hilite by Ryan Boren</a>, with some optimisations and adapted to support HTML5.
+
+Cache plugin compatibility added in version 1.2
 
 **NOTE:**  to make the highlights visible in browsers that do not support HTML5 like Internet Explorer 8 or older you will have to define at least one CSS hilite styling! Read on below **So what do I need to do?** and [Installation](http://wordpress.org/extend/plugins/highlight-search-terms/installation/) for more detailed instructions. You can find CSS examples in [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/).
 
@@ -25,16 +27,16 @@ There are no CSS style rules set for highlighting. You are free to use any styli
 
 = So what do I need to do? =
 
-**1. Define CSS rules**
-There are _no_ configuration options and there is _no_ predefined highlight styling. You are completely free to define any CSS styling rules in your themes **main stylesheet (style.css)** or use any **Custom CSS plugin** like [Custom CSS](http://wordpress.org/extend/plugins/safecss/) to get a result that fits your theme best. You can find basic instructions and CSS examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
+In most cases, it should just work. But you can do two things to ensure backward browser and theme compatibility:
 
-**2. Check your theme**
-In most up to date themes (including WP's own Default theme) post and page content is shown inside a div with class `hentry`. This means search terms found in post and page content will be highlighted but not similar terms that accidentaly show in the page header, sidebar or footer. If your current theme does not use the `hentry` class (yet), this plugin will look for IDs `content`, `main` and finally `wrapper` but if none of those are found, it not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
+**1. Define CSS rules:** There are _no_ configuration options and there is _no_ predefined highlight styling. You are completely free to define any CSS styling rules in your themes **main stylesheet (style.css)** or use any **Custom CSS plugin** like [Custom CSS](http://wordpress.org/extend/plugins/safecss/) to get a result that fits your theme best. You can find basic instructions and CSS examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
+
+**2. Check your theme:** In most up to date themes (including WP's own default theme) post and page content is shown inside a div with class `hentry`. This means search terms found in post and page content will be highlighted but not similar terms that accidentaly show in the page header, sidebar or footer. If your current theme does not use the `hentry` class (yet), this plugin will look for IDs `content`, `main` and finally `wrapper` but if none of those are found, it will not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
 
 
 == Installation ==
 
-To make it work, you will need to take **two steps**! (I) A normal installation and activation procedure _and_ (II) adding CSS styling rules to get highlighting for browsers that do not support HTML5 like Internet Explorer 8 or older. Without that last step, visitors using older browsers will not see any hilites.
+To make it work, you will need to take up to three steps, depending on your wishes and WordPress theme. (I) A normal installation and activation procedure; (II) adding CSS styling rules to get highlighting for older browsers that do not support HTML5 like Internet Explorer 8 and below; _and_ (III) Make sure your theme uses any of the recognized classes or ID's for the post content div so that the script knows where and where not to look for search terms.
 
 **I.** [Install now](http://coveredwebservices.com/wp-plugin-install/?plugin=highlight-search-terms) _or_ use the slick search and install feature (Plugins > Add New and search for "highlight search terms") in your WP2.7+ admin section _or_ follow these basic steps.
 
@@ -47,6 +49,8 @@ To make it work, you will need to take **two steps**! (I) A normal installation 
 For example use `.hilite { background:#D3E18A; }` to get a moss green background on search terms found in the content section (not header, sidebar or footer; assuming your Theme uses a div with class "hentry").
 
 Please find more examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
+
+*III.* In most up to date themes (including WP's own Default theme) post and page content is shown inside a div with class `hentry`. This class is recognized by the hilite script, which means search terms found in post and page content will be highlighted but *not* similar terms that coincidentaly reside in the page header, sidebar or footer. If your current theme does not use the `hentry` class (yet), this plugin will look for IDs `content`, `main` and finally `wrapper` (which might include the header, sidebar and footer areas) but if *none* of those are found, it will not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
 
 
 == Frequently Asked Questions ==
@@ -63,13 +67,13 @@ Sure! See tab [Other Notes](http://wordpress.org/extend/plugins/highlight-search
 
 = I still do not see any highlighting! =
 
-Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other, even basic, javascript code) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. If that is not available, the script will look for divs #content then #main then #wrapper. However, in your particular theme, none of these divs might be available... 
+Due to a problem with jQuery's `$('body')` call in combination with many other scripts (like Google Ads, Analytics, Skype Check and other javascript) in the ever increasingly popular Firefox browser, I have had to limit the script search term wrapping to a particular div instead of the whole document body. I chose div with class "hentry" since that is the most commonly used content layer class in WordPress themes. If that is not available, the script will look for divs #content then #main then #wrapper. However, in your particular theme, none of these divs might be available... 
 
 Let's suppose your theme's index.php or single.php has no `<div <?php post_class() ?> ... >` but wraps the post/page content in a `<div id="common" class="content"> ... </div>`. You can do two things to solve this:
 
 A. Change your theme and stylesheet so the post/page content div has either `class="hentry"` or `<?php post_class() ?>`. TIP: Take a look at how it is done in the Default theme included in each WordPress release. But this might involve some real timeconsuming tinkering with your stylesheet and several theme template files.
 
-B. Change the source of wp-content/plugins/highlight-search-terms/hlst.php on line 61 so that the array contains your main content ID or class name. In the above example that can be either `'#common',` or `'.content',` where a prefix '#' is used for ID and '.' for class.
+B. Change the source of wp-content/plugins/highlight-search-terms/hlst.php so that the array starting on line 55 contains your main content ID or class name. In the above example that can be either `'#common',` or `'.content',` where a prefix '#' is used for ID and '.' for class.
 
 C. Switch to a theme that does abide by the current WordPress conventions :)
 
@@ -125,7 +129,7 @@ Keep in mind that for the _first_ search term the additional class "term-0" is u
 
 2. [Josh](http://theveganpost.com) pointed out a conflict with the [ShareThis button](http://sharethis.com/wordpress). I have no clue why this happens but since version 0.5 jQuery is used in so called NoConflict mode. Please let me know if the problem still exists. Thanks!
 
-3. When search engine referrer is using SSL (notice the https:// in the URL, usually when logged in as Google user) and the WordPress site is not, then search terms cannot be determined.
+3. When search engine referrer is using SSL (notice the https:// in the URL, usually when logged in as Google user) and your WordPress site is not, then the search terms cannot be determined. There is no way to get around that issue.
 
 Thank you, [Jason](http://wordpress.org/support/profile/412612) for pointing out a bug for IE7+, fixed in 0.2. 
 
@@ -135,17 +139,19 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 == Upgrade Notice ==
 
 = 0.9 =
-
+Search terms wrapped in double qoutes now considered as single term. Caching compatible. Second click highlighting: not only on the search results page but also inside any of the found pages. Speed improvement. And more search engines supported.
 
 == Changelog ==
 
-= 0.9 =
+= 1.2 =
 
-Date 2012-
+Date 2012-07-25
 
-* implement as Class
-* Search terms wrapped in qoutes now considered as single term
-* site:domain.ext now stripped from Google searches
+* NEW: Caching (WP Super Cache) compatibility
+* NEW: Highlights not only on WP search results page but also one click deeper inside any of the found pages
+* NEW: Search terms wrapped in double qoutes now considered as single term
+* support many more search engines: AOL, Dogpile, Search.com, Goodsearch.com, Mywebsearch.com, Webcrawler.com, Info.com
+* rebuilt as Class
 * plugin speed improvements
 
 = 0.8 =

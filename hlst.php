@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://4visions.nl/en/wordpress-plugins/highlight-search-terms
 Description: Wraps search terms in the HTML5 mark tag when referer is a search engine or within wp search results. No options to set. Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and examples for styling the highlights. <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=0%2e6&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8&lc=us" title="Thank you!">Tip jar</a>.
-Version: 0.9alpha
+Version: 1.2
 Author: RavanH
 Author URI: http://4visions.nl/
 */
@@ -36,7 +36,7 @@ if(!empty($_SERVER['SCRIPT_FILENAME']) && basename(__FILE__) == basename($_SERVE
  *      CONSTANTS
  * -------------------- */
 
-define('HLST_VERSION','0.9');
+define('HLST_VERSION','1.2');
 
 /* -----------------
  *      CLASS
@@ -51,6 +51,18 @@ class HighlightSearchTerms {
 	/**
 	* Plugin variables
 	*/
+
+	static $areas = array(		// Change or extend this to match themes content div ID or classes.
+			'div.hentry',	// The hilite script will test div ids/classes and use the first one it
+			'#content',	// finds so put the most common one first, then follow with the less
+			'#main',	// used or common outer wrapper div ids.
+			'div.content',	// When referencing an *ID name*, just be sure to begin with a '#'.
+			'#middle',	// When referencing a *class name*, try to put the tag in front,
+			'#container',	// followed by a '.' and then the class name to *improve script speed*.
+			'#wrapper'	// Example: div.hentry instead of just .hentry
+			);		// Using the tag 'body' is known to cause conflicts.
+
+	static $cache_compat = true;
 
 	protected static $do_extend;
 
@@ -75,68 +87,41 @@ class HighlightSearchTerms {
 	
 	// Get query variables and print header script
 	public static function query() {
-			
-		$areas = array(		// Change or extend this to match themes content div ID or classes.
-			'div.hentry',	// The hilite script will test div ids/classes and use the first one it
-			'#content',	// finds so put the most common one first, then follow with the less
-			'#main',	// used or common outer wrapper div ids.
-			'div.content',	// When referencing an *ID name*, just be sure to begin with a '#'.
-			'#middle',	// When referencing a *class name*, try to put the tag in front,
-			'#container',	// followed by a '.' and then the class name to *improve script speed*.
-			'#wrapper'	// Example: div.hentry instead of just .hentry
-			);		// Using the tag 'body' is known to cause conflicts.
-
-		$terms = self::get_search_query();
-		if ( false == $terms) {
-			self::$do_extend = false;
-			return;
-		}
-	
 		$filtered = array();
-		foreach($terms as $term) {
-			$term = esc_attr(trim(str_replace(array('"','\'','%22'), '', $term)));
-			if ( !empty($term) && strrpos($term,"site:") === false ) {
-				$filtered[] = '"'.$term.'"';
+		$search = get_search_query(false);
+		$terms =  array(); //self::get_search_query();
+		if ( $search && preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $terms) ) {
+			foreach($terms[0] as $term) {
+				$term = esc_attr(trim(str_replace(array('"','\'','%22'), '', $term)));
+				if ( !empty($term) ) {
+					$filtered[] = '"'.$term.'"';
+				}
 			}
 		}
 
-		/*if (strrpos($filtered[0],"https://")&&!isset($filtered[1])) {
-			self::$do_extend = false;
-			echo '
-<!-- Highlight Search Terms ' . HLST_VERSION . ' ( RavanH - http://4visions.nl/en/wordpress-plugins/highlight-search-terms/ ) -->
-<!-- Referrer uses SSL. Search terms could not be determined. -->
-';
-		} else*/
-		if (count($filtered) > 0) { 
-			self::$do_extend = true;
-			echo '
+		self::$do_extend = true;
+		echo '
 <!-- Highlight Search Terms ' . HLST_VERSION . ' ( RavanH - http://4visions.nl/en/wordpress-plugins/highlight-search-terms/ ) -->
 <script type="text/javascript">
 var hlst_query = new Array(' . implode(',',$filtered) . ');
-var hlst_areas = new Array("' . implode('","',$areas) . '");
+var hlst_areas = new Array("' . implode('","',self::$areas) . '");
 </script>
 ';
-		} else {
-			self::$do_extend = false;
-		}
 	} 
 	
 	// Extend jQ 
 	public static function extend() {
-		if ( self::$do_extend )
+		if ( $cache_compat || self::$do_extend )
 			wp_print_scripts('hlst-extend');
 	}
 	
 	// Get search term
 	protected static function get_search_query() {
-		$referer = isset($_SERVER['HTTP_REFERER']) ? urldecode($_SERVER['HTTP_REFERER']) : false;
 		$search = get_search_query(false);
 		$query_array = array();
 
 		if ( $search ) {
 			$found = preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $query_array);
-		} elseif ( $referer && preg_match('@^http(s)?://(.*)?\.?(google|yahoo|lycos|bing|ask|baidu|youdao).*@i', $referer) ) {
-			$found = preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', preg_replace('/^.*(&q|query|p|wd)=([^&]+)&?.*$/i','$2', $referer), $query_array);
 		}
 		
 		return !empty($found) && isset($query_array[0]) && $query_array[0][0] != $referer ? $query_array[0] : false;
