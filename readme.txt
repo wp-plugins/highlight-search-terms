@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=r
 Tags: mark, highlight, hilite, search, term, terms, jquery
 Requires at least: 2.3
 Tested up to: 3.4.1
-Stable tag: 0.8
+Stable tag: 1.2
 
 Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when referer is a search engine or within wp search results.
 
