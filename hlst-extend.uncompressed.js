@@ -2,7 +2,11 @@ jQuery.fn.extend({
   highlight: function(term, insensitive, span_class){
     var regex = new RegExp('(<[^>]*>)|('+ term.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', insensitive ? 'ig' : 'g');
     return this.html(this.html().replace(regex, function(a, b, c){
-      return (a.charAt(0) == '<') ? a : '<mark class="'+ span_class +'">' + c + '</mark>';
+      if (typeof(window.html5)==='undefined') {
+        return (a.charAt(0) == '<') ? a : '<span class="'+ span_class +'">' + c + '</span>';
+      } else {
+        return (a.charAt(0) == '<') ? a : '<mark class="'+ span_class +'">' + c + '</mark>';
+      }
     }));
   }
 });
