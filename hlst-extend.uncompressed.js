@@ -2,10 +2,10 @@ jQuery.fn.extend({
   highlight: function(term, insensitive, span_class){
     var regex = new RegExp('(<[^>]*>)|('+ term.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', insensitive ? 'ig' : 'g');
     return this.html(this.html().replace(regex, function(a, b, c){
-      if (typeof(window.html5)==='undefined') {
-        return (a.charAt(0) == '<') ? a : '<span class="'+ span_class +'">' + c + '</span>';
-      } else {
+      if (jQuery.support.opacity) {
         return (a.charAt(0) == '<') ? a : '<mark class="'+ span_class +'">' + c + '</mark>';
+      } else {
+        return (a.charAt(0) == '<') ? a : '<span class="'+ span_class +'">' + c + '</span>';
       }
     }));
   }
@@ -40,7 +40,7 @@ jQuery(document).ready((function($){
               qstr = qstr.replace(/\%22/g,'"');
               qstr = qstr.replace(/\%20|\+/g," ");
               qstr = qstr.replace(/\%2B/g,"+");
-              qarr = qstr.match(/([^\s"]+)|"([^"]*)"/g)
+              qarr = qstr.match(/([^\s"]+)|"([^"]*)"/g);
               for (i in qarr){
                 hlst_query[i] = qarr[i].replace(/"/g,'');
               }
