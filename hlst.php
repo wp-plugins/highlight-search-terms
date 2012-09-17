@@ -101,7 +101,7 @@ class HighlightSearchTerms {
 
 		self::$do_extend = true;
 		echo '
-<!-- Highlight Search Terms ' . HLST_VERSION . ' ( RavanH - http://4visions.nl/en/wordpress-plugins/highlight-search-terms/ ) -->
+<!-- Highlight Search Terms ' . HLST_VERSION . ' ( RavanH - http://status301.net/wordpress-plugins/highlight-search-terms/ ) -->
 <script type="text/javascript">
 var hlst_query = new Array(' . implode(',',$filtered) . ');
 var hlst_areas = new Array("' . implode('","',self::$areas) . '");
