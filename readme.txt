@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=r
 Tags: mark, highlight, hilite, search, term, terms, jquery
 Requires at least: 2.3
 Tested up to: 3.4.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when referer is a search engine or within wp search results.
 
@@ -142,6 +142,12 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 Search terms wrapped in double qoutes now considered as single term. Caching compatible. Second click highlighting: not only on the search results page but also inside any of the found pages. Speed improvement. And more search engines supported.
 
 == Changelog ==
+
+= 1.2.2 =
+
+Date 2012-10-11
+
+* BUGFIX: Undefined variable: cache_compat
 
 = 1.2.1 =
 
