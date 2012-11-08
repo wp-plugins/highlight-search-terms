@@ -54,7 +54,7 @@ For example use `.hilite { background:#D3E18A; }` to get a moss green background
 
 Please find more examples under the [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/) tab.
 
-*III.* In most up to date themes (including WP's own Default theme) post and page content is shown inside a div with class `hentry`. This class is recognized by the hilite script, which means search terms found in post and page content will be highlighted but *not* similar terms that coincidentaly reside in the page header, sidebar or footer. If your current theme does not use the `hentry` class (yet), this plugin will look for IDs `content`, `main` and finally `wrapper` (which might include the header, sidebar and footer areas) but if *none* of those are found, it will not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
+**III.** In most up to date themes (including WP's own Default theme) post and page content is shown inside a div with class `hentry`. This class is recognized by the hilite script, which means search terms found in post and page content will be highlighted but *not* similar terms that coincidentaly reside in the page header, sidebar or footer. If your current theme does not use the `hentry` class (yet), this plugin will look for IDs `content`, `main` and finally `wrapper` (which might include the header, sidebar and footer areas) but if *none* of those are found, it will not work for you out of the box. See the last of the [FAQ's](http://wordpress.org/extend/plugins/highlight-search-terms/faq/) for ways to make it work.
 
 
 == Frequently Asked Questions ==
