@@ -3,7 +3,7 @@ Contributors: RavanH
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=ravanhagen%40gmail%2ecom&amp;item_name=Highlight%20Search%20Terms&amp;item_number=0%2e6&amp;no_shipping=0&amp;tax=0&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8
 Tags: mark, highlight, hilite, search, term, terms, jquery
 Requires at least: 2.3
-Tested up to: 3.4.1
+Tested up to: 3.4.2
 Stable tag: 1.2.2
 
 Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when referer is a search engine or within wp search results.
@@ -11,9 +11,13 @@ Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when
 
 == Description ==
 
-Highlights search terms using jQuery when referer is a Google, Bing, Yahoo, Lycos, Ask, AOL, Baidu, Youdao and many more search engine _or_ within WordPress generated search results. This plugin is a light weight, low resource demanding and very simple fusion between <a href="http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/">How to Highlight Search Terms with jQuery - theme hack by Thaya Kareeson</a> and <a href="http://wordpress.org/extend/plugins/google-highlight/">Search Hilite by Ryan Boren</a>, with some optimisations and adapted to support HTML5.
+Highlights search terms using jQuery when referer is a search engine _or_ within WordPress generated search results. This plugin is a light weight, low resource demanding and very simple fusion between <a href="http://weblogtoolscollection.com/archives/2009/04/10/how-to-highlight-search-terms-with-jquery/">How to Highlight Search Terms with jQuery - theme hack by Thaya Kareeson</a> and <a href="http://wordpress.org/extend/plugins/google-highlight/">Search Hilite by Ryan Boren</a>, with some optimisations and adapted to support HTML5.
 
-Cache plugin compatibility added in version 1.2
+**New since version 1.2**
+* Caching (WP Super Cache) compatibility
+* Highlights not only on WP search results page but also one click deeper inside any of the found pages
+* Search terms wrapped in double qoutes now considered as single term
+* Support for many more search engines: Google, Bing, Yahoo, Lycos, Ask, AOL, Baidu, Youdao, Dogpile, Search.com, Goodsearch.com, Mywebsearch.com, Webcrawler.com, Info.com
 
 **NOTE:**  to make the highlights visible in browsers that do not support HTML5 like Internet Explorer 8 or older you will have to define at least one CSS hilite styling! Read on below **So what do I need to do?** and [Installation](http://wordpress.org/extend/plugins/highlight-search-terms/installation/) for more detailed instructions. You can find CSS examples in [Other Notes](http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/).
 
@@ -136,17 +140,17 @@ Thank you, [Jason](http://wordpress.org/support/profile/412612) for pointing out
 Please provide me with a bugreport, suggestion or question if you run into any problems!
 
 
-== Upgrade Notice ==
-
-= 1.2.1 =
-Search terms wrapped in double qoutes now considered as single term. Caching compatible. Second click highlighting: not only on the search results page but also inside any of the found pages. Speed improvement. And more search engines supported.
-
 == Changelog ==
 
 = 1.2.2 =
 
 Date 2012-10-11
 
+* Search terms wrapped in double qoutes now considered as single term
+* Caching compatible
+* Second click highlighting: not only on the search results page but also inside any of the found pages
+* Speed improvement
+* More search engines supported
 * BUGFIX: Undefined variable: cache_compat
 
 = 1.2.1 =
