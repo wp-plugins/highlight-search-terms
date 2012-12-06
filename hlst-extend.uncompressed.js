@@ -14,6 +14,7 @@ jQuery(document).ready((function($){
 
   function get_hlst_query() {
     var ref = document.referrer.split('?');
+    /*console.log('referer query parameters: ' + ref[1]);*/
     if (typeof(ref[1]) != 'undefined'){
       var term;
       if (document.referrer.indexOf(document.domain) < 9) {
@@ -29,21 +30,27 @@ jQuery(document).ready((function($){
       } else {
         term = 'q';
       }
+      /*console.log('searchengine term: ' + term);*/
       /* document.referrer.indexOf('google.') > -1 || document.referrer.indexOf('bing.com') > -1 || document.referrer.indexOf('aol.') > -1 || document.referrer.indexOf('lycos.') > -1 || document.referrer.indexOf('ask.com') > -1 || document.referrer.indexOf('dogpile.com') > -1 || document.referrer.indexOf('search.com') > -1 || document.referrer.indexOf('webcrawler.com') > -1 || document.referrer.indexOf('info.com') > -1 || document.referrer.indexOf('youdao.com') > -1 */
 
       var parms = ref[1].split('&');
+      /*console.log('parms split into ' + parms.length);*/
       for (var i=0; i < parms.length; i++) {
+        /*console.log('parameter ' + i + ': ' + parms[i]);*/
         var pos = parms[i].indexOf('=');
         if (pos > 0) {
             if(term == parms[i].substring(0,pos)) {
               qstr = parms[i].substring(pos+1);
+              /*console.log('search query found: ' + qstr);*/
               qstr = qstr.replace(/\%22/g,'"');
               qstr = qstr.replace(/\%20|\+/g," ");
               qstr = qstr.replace(/\%2B/g,"+");
               qarr = qstr.match(/([^\s"]+)|"([^"]*)"/g);
-              for (i in qarr){
-                hlst_query[i] = qarr[i].replace(/"/g,'');
+              for (var j=0; j < qarr.length; j++){
+                /*console.log('added ' + qarr[j] + ' to search array');*/
+                hlst_query[j] = qarr[j].replace(/"/g,'');
               }
+              break;
             }
         }
       }
@@ -52,14 +59,16 @@ jQuery(document).ready((function($){
 
   if (typeof(hlst_query) != 'undefined') {
     if (hlst_query.length == 0) {
+        /*console.log('going into get_hlst_query()');*/
     	get_hlst_query();
     }
     var area; var i; var s;
     for (s in hlst_areas){
       area = $(hlst_areas[s]);
       if (area.length != 0){
-        for (var l = 0; l<area.length; l++) {
+        for (var l = 0; l < area.length; l++) {
 		for (i in hlst_query){
+		  /*console.log('keyword: ' + hlst_query[i]);*/
 		  area.eq(l).highlight(hlst_query[i], 1, 'hilite term-' + i);
 		}
 	}
