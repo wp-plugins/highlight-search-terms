@@ -143,6 +143,10 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 == Changelog ==
 
+= 1.2.4 =
+
+* BUGFIX: non-western languages in URL not decoded
+
 = 1.2.3 =
 
 Date 2012-12-06
