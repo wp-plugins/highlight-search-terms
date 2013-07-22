@@ -143,6 +143,12 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 == Changelog ==
 
+= 1.2.5 =
+
+Date 2013-07-22
+
+* FIX: Combine-JS compatibility (Thanks to Joshua Hoke)
+
 = 1.2.4 =
 
 Date 2012-12-16

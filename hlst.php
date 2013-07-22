@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://status301.net/wordpress-plugins/highlight-search-terms
 Description: Wraps search terms in the HTML5 mark tag when referer is a search engine or within wp search results. No options to set. Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and examples for styling the highlights. <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=0%2e6&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8&lc=us" title="Thank you!">Tip jar</a>.
-Version: 1.2.4
+Version: 1.2.5
 Author: RavanH
 Author URI: http://status301.net/
 */
@@ -36,14 +36,10 @@ if(!empty($_SERVER['SCRIPT_FILENAME']) && basename(__FILE__) == basename($_SERVE
  *      CONSTANTS
  * -------------------- */
 
-define('HLST_VERSION','1.2.4');
+define('HLST_VERSION','1.2.5');
 
 /* -----------------
  *      CLASS
- *
- * Thanks go to Scribu, the Jedi Master, and his teachings
- * on http://scribu.net/wordpress/optimal-script-loading.html
- *
  * ----------------- */
 
 class HighlightSearchTerms {
@@ -62,9 +58,6 @@ class HighlightSearchTerms {
 			'#wrapper'	// Example: div.hentry instead of just .hentry
 			);		// Using the tag 'body' is known to cause conflicts.
 
-	static $cache_compat = true;
-
-	protected static $do_extend;
 
 	/**
 	* Plugin functions
@@ -77,12 +70,10 @@ class HighlightSearchTerms {
 		// Set query string as js variable in header
 		add_action('wp_head', array(__CLASS__, 'query') );
 
-		// Extend jQ in footer
-		add_action('wp_footer', array(__CLASS__, 'extend') );
 	}
 
 	public static function register_script() {		
-		wp_register_script('hlst-extend', plugins_url('hlst-extend.js', __FILE__), array('jquery'), HLST_VERSION, true);
+		wp_enqueue_script('hlst-extend', plugins_url('hlst-extend.js', __FILE__), array('jquery'), HLST_VERSION, true);
 	}
 	
 	// Get query variables and print header script
@@ -99,7 +90,6 @@ class HighlightSearchTerms {
 			}
 		}
 
-		self::$do_extend = true;
 		echo '
 <!-- Highlight Search Terms ' . HLST_VERSION . ' ( RavanH - http://status301.net/wordpress-plugins/highlight-search-terms/ ) -->
 <script type="text/javascript">
@@ -109,24 +99,6 @@ var hlst_areas = new Array("' . implode('","',self::$areas) . '");
 ';
 	} 
 	
-	// Extend jQ 
-	public static function extend() {
-		if ( self::$cache_compat || self::$do_extend )
-			wp_print_scripts('hlst-extend');
-	}
-	
-	// Get search term
-	protected static function get_search_query() {
-		$search = get_search_query(false);
-		$query_array = array();
-
-		if ( $search ) {
-			$found = preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $query_array);
-		}
-		
-		return !empty($found) && isset($query_array[0]) && $query_array[0][0] != $referer ? $query_array[0] : false;
-	}
-
 }
 
 HighlightSearchTerms::init();
