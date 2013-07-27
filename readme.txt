@@ -148,6 +148,7 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 Date 2013-07-28
 
 * FIX: Combine-JS compatibility (Thanks to Joshua Hoke)
+* More possible classes and ids to look for
 
 = 1.2.4 =
 
