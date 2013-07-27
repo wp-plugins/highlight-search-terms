@@ -49,14 +49,17 @@ class HighlightSearchTerms {
 	*/
 
 	static $areas = array(		// Change or extend this to match themes content div ID or classes.
-			'div.hentry',	// The hilite script will test div ids/classes and use the first one it
+			'.hentry',	// The hilite script will test div ids/classes and use the first one it
 			'#content',	// finds so put the most common one first, then follow with the less
 			'#main',	// used or common outer wrapper div ids.
 			'div.content',	// When referencing an *ID name*, just be sure to begin with a '#'.
 			'#middle',	// When referencing a *class name*, try to put the tag in front,
 			'#container',	// followed by a '.' and then the class name to *improve script speed*.
-			'#wrapper'	// Example: div.hentry instead of just .hentry
-			);		// Using the tag 'body' is known to cause conflicts.
+			'.container',
+			'.post',
+			'.page',
+			'#wrapper'	
+			);		// Note: Using the tag 'body' is known to cause conflicts.
 
 
 	/**
