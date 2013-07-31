@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://status301.net/wordpress-plugins/highlight-search-terms
 Description: Wraps search terms in the HTML5 mark tag when referer is a search engine or within wp search results. No options to set. Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and examples for styling the highlights. <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=0%2e6&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8&lc=us" title="Thank you!">Tip jar</a>.
-Version: 1.2.5
+Version: 1.2.9
 Author: RavanH
 Author URI: http://status301.net/
 */
@@ -36,7 +36,7 @@ if(!empty($_SERVER['SCRIPT_FILENAME']) && basename(__FILE__) == basename($_SERVE
  *      CONSTANTS
  * -------------------- */
 
-define('HLST_VERSION','1.2.5');
+define('HLST_VERSION','1.2.9');
 
 /* -----------------
  *      CLASS
@@ -49,6 +49,7 @@ class HighlightSearchTerms {
 	*/
 
 	static $areas = array(		// Change or extend this to match themes content div ID or classes.
+			'li.bbp-body',
 			'.hentry',	// The hilite script will test div ids/classes and use the first one it
 			'#content',	// finds so put the most common one first, then follow with the less
 			'#main',	// used or common outer wrapper div ids.
@@ -82,16 +83,19 @@ class HighlightSearchTerms {
 	// Get query variables and print header script
 	public static function query() {
 		$filtered = array();
-		$search = get_search_query(false);
-		$terms =  array(); //self::get_search_query();
-		if ( $search && preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $terms) ) {
-			foreach($terms[0] as $term) {
-				$term = esc_attr(trim(str_replace(array('"','\'','%22'), '', $term)));
-				if ( !empty($term) ) {
-					$filtered[] = '"'.$term.'"';
+		$searches = array();
+
+		$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 's' ) ) );
+		$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 'bbp_search' ) ) ); // bbPress and BuddyPress searches
+		
+		foreach ($searches as $search)
+			$terms =  array();
+			if( preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $terms) )
+				foreach($terms[0] as $term) {
+					$term = esc_attr(trim(str_replace(array('"','\'','%22'), '', $term)));
+					if ( !empty($term) )
+						$filtered[] = '"'.$term.'"';
 				}
-			}
-		}
 
 		echo '
 <!-- Highlight Search Terms ' . HLST_VERSION . ' ( RavanH - http://status301.net/wordpress-plugins/highlight-search-terms/ ) -->
