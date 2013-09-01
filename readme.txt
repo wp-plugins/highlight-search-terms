@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=r
 Tags: mark, highlight, hilite, search, term, terms, jquery
 Requires at least: 2.3
 Tested up to: 3.6
-Stable tag: 1.2.5
+Stable tag: 1.3
 
 Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when referer is a search engine or within wp search results.
 
@@ -143,6 +143,13 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 
 == Changelog ==
+
+= 1.3 =
+
+Date 2013-09-02
+
+* BuddyPress and bbPress highlighting within forum searches
+* FIX: jQuery 1.10 compatibility
 
 = 1.2.5 =
 
