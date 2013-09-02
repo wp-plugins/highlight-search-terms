@@ -49,9 +49,9 @@ class HighlightSearchTerms {
 	*/
 
 	static $areas = array(		// Change or extend this to match themes content div ID or classes.
+			'article',
 			'#groups-dir-list', '#members-dir-list', // BuddyPress compat
 			'li.bbp-body', // bbPress compat
-			'article',
 			'.hentry',	// The hilite script will test div ids/classes and use the first one it
 			'.post',
 			'#content',	// finds so put the most common one first, then follow with the less
