@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://status301.net/wordpress-plugins/highlight-search-terms
 Description: Wraps search terms in the HTML5 mark tag when referer is a search engine or within wp search results. No options to set. Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and examples for styling the highlights. <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=0%2e6&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8&lc=us" title="Thank you!">Tip jar</a>.
-Version: 1.3
+Version: 1.4
 Author: RavanH
 Author URI: http://status301.net/
 */
@@ -36,7 +36,7 @@ if(!empty($_SERVER['SCRIPT_FILENAME']) && basename(__FILE__) == basename($_SERVE
  *      CONSTANTS
  * -------------------- */
 
-define('HLST_VERSION','1.3');
+define('HLST_VERSION','1.4');
 
 /* -----------------
  *      CLASS
@@ -48,21 +48,27 @@ class HighlightSearchTerms {
 	* Plugin variables
 	*/
 
-	static $areas = array(		// Change or extend this to match themes content div ID or classes.
+	// Change or extend this to match themes content div ID or classes.
+	// The hilite script will test div ids/classes and use the first one it finds.
+	// When referencing an *ID name*, just be sure to begin with a '#'.
+	// When referencing a *class name*, try to put the tag in front,
+	// followed by a '.' and then the class name to *improve script speed*.
+	// WARNING: Using the tag 'body' is known to cause conflicts.
+	static $areas = array(	
 			'article',
 			'#groups-dir-list', '#members-dir-list', // BuddyPress compat
 			'li.bbp-body', // bbPress compat
-			'.hentry',	// The hilite script will test div ids/classes and use the first one it
-			'.post',
-			'#content',	// finds so put the most common one first, then follow with the less
-			'#main',	// used or common outer wrapper div ids.
-			'.content',	// When referencing an *ID name*, just be sure to begin with a '#'.
-			'#middle',	// When referencing a *class name*, try to put the tag in front,
-			'#container',	// followed by a '.' and then the class name to *improve script speed*.
-			'.container',
-			'.page',
-			'#wrapper'	
-			);		// Using the tag 'body' is known to cause conflicts.
+			'div.hentry',
+			'div.post',
+			'#content',
+			'#main',
+			'div.content',
+			'#middle',
+			'#container',
+			'div.container',
+			'div.page',
+			'#wrapper'
+			);		
 
 
 	/**
@@ -90,13 +96,17 @@ class HighlightSearchTerms {
 		$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 's' ) ) );
 		$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 'bbp_search' ) ) ); // a bbPress search
 		
-		foreach ($searches as $search) {
-			$terms =  array();
-			if( preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $terms) ) {
-				foreach($terms[0] as $term) {
-					$term = esc_attr(trim(str_replace(array('"','\'','%22'), '', $term)));
-					if ( !empty($term) )
-						$filtered[] = '"'.$term.'"';
+		if ( '1' == get_query_var( 'sentence' ) ) {
+			$filtered[] = '"'.$searches[0].'"';
+		} else {	
+			foreach ($searches as $search) {
+				$terms = array();
+				if ( preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $terms) ) {
+					foreach($terms[0] as $term) {
+						$term = esc_attr(trim(str_replace(array('"','\'','%22'), '', $term)));
+						if ( !empty($term) )
+							$filtered[] = '"'.$term.'"';
+					}
 				}
 			}
 		}
@@ -108,9 +118,8 @@ var hlst_query = new Array(' . implode(',',$filtered) . ');
 var hlst_areas = new Array("' . implode('","',self::$areas) . '");
 </script>
 ';
-	} 
-	
+	}
+
 }
 
 HighlightSearchTerms::init();
-
