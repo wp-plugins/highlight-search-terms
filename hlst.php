@@ -68,8 +68,7 @@ class HighlightSearchTerms {
 			'div.container',
 			'div.page',
 			'#wrapper'
-			);		
-
+			);
 
 	/**
 	* Plugin functions
