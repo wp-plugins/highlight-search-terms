@@ -92,19 +92,31 @@ class HighlightSearchTerms {
 		$filtered = array();
 		$searches = array();
 
-		$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 's' ) ) );
-		$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 'bbp_search' ) ) ); // a bbPress search
-		
-		if ( '1' == get_query_var( 'sentence' ) ) {
-			$filtered[] = '"'.$searches[0].'"';
-		} else {	
+		// get terms
+		if ( get_query_var( 'search_terms' ) ) {
+			$searches = get_query_var( 'search_terms' );
+			// TODO get bbp_search to work here !!
+			
+			// prepare js array
 			foreach ($searches as $search) {
-				$terms = array();
-				if ( preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $terms) ) {
-					foreach($terms[0] as $term) {
-						$term = esc_attr(trim(str_replace(array('"','\'','%22'), '', $term)));
-						if ( !empty($term) )
-							$filtered[] = '"'.$term.'"';
+				$filtered[] = '"'.$search.'"';
+			}
+		} else {
+			$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 's' ) ) );
+			$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 'bbp_search' ) ) ); // a bbPress search
+			// prepare js array
+			if ( '1' == get_query_var( 'sentence' ) ) {
+				// take only the first search term and treat it as a sentence
+				$filtered[] = '"'.$searches[0].'"';
+			} else {	
+				foreach ($searches as $search) {
+					$terms = array();
+					if ( preg_match_all('/([^\s"\']+)|"([^"]*)"|\'([^\']*)\'/', $search, $terms) ) {
+						foreach($terms[0] as $term) {
+							$term = esc_attr(trim(str_replace(array('"','\'','%22'), '', $term)));
+							if ( !empty($term) )
+								$filtered[] = '"'.$term.'"';
+						}
 					}
 				}
 			}
