@@ -99,14 +99,14 @@ class HighlightSearchTerms {
 			
 			// prepare js array
 			foreach ($searches as $search) {
-				$filtered[] = '"'.$search.'"';
+				$filtered[] = '"'.esc_attr($search).'"';
 			}
 		} else {
-			$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 's' ) ) );
+			$searches[] = get_search_query( 's' );
 			$searches[] = esc_attr( apply_filters( 'get_search_query', get_query_var( 'bbp_search' ) ) ); // a bbPress search
 			// prepare js array
 			if ( '1' == get_query_var( 'sentence' ) ) {
-				// take only the first search term and treat it as a sentence
+				// treat it as a one sentence search, take only the first search term
 				$filtered[] = '"'.$searches[0].'"';
 			} else {	
 				foreach ($searches as $search) {
