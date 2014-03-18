@@ -50,7 +50,7 @@ console.log('parameter ' + i + ': ' + parms[i]);
 /*
 console.log('search query found: ' + qstr);
 */
-              qarr = qstr.match(/([^\s"]+)|"([^"]*)"/g);
+              qarr = qstr.match(/([^\s"]+)|"([^"]*)"/g) || [];
               for (var j=0; j < qarr.length; j++){
 /*
 console.log('added ' + qarr[j] + ' to search array');

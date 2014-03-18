@@ -144,6 +144,11 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 == Changelog ==
 
+= 1.3.9 =
+
+* WordPress 3.8 search comptatibily (allowing less fuzzy search with quotes)
+* FIX: XSS vulnerability found by [Rodolfo Godalle, Jr.](http://www.facebook.com/junior.ns1de)
+
 = 1.3 =
 
 Date 2013-09-02
