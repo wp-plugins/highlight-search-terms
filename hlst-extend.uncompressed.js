@@ -1,15 +1,40 @@
-jQuery.fn.extend({
-  highlight: function(term, insensitive, span_class){
-    var regex = new RegExp('(<[^>]*>)|('+ term.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', insensitive ? 'ig' : 'g');
-    return this.html(this.html().replace(regex, function(a, b, c){
-      if (jQuery.support.opacity) {
-        return (a.charAt(0) == '<') ? a : '<mark class="'+ span_class +'">' + c + '</mark>';
-      } else {
-        return (a.charAt(0) == '<') ? a : '<span class="'+ span_class +'">' + c + '</span>';
-      }
-    }));
-  }
-});
+(function($){
+	$.fn.highlight = function( term, insensitive, term_tag, term_class ) {
+		return this.each(function(){
+			var node = this.firstChild,
+				val,
+				new_val,
+				remove = [],
+				regex = new RegExp('(<[^>]*>)|('+ term.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', insensitive ? 'ig' : 'g');
+
+			if ( node ) {
+				do {
+					if ( node.nodeType === 3 ) {
+						val = node.nodeValue;
+/*
+console.log('inside: ' + val);
+*/
+						new_val = val.replace( regex, function(a, b, c){
+/*
+console.log('found term: ' + term);
+console.log('with regex: ' + regex);
+console.log('replacing with: ' + '<' + term_tag + ' class="'+ term_class +'">' + c + '</' + term_tag + '>');
+*/
+							return (a.charAt(0) == '<') ? a : '<' + term_tag + ' class="'+ term_class +'">' + c + '</' + term_tag + '>';
+						} );
+						if ( new_val !== val ) {
+							$(node).before( new_val );
+							remove.push( node );
+						}
+					}
+				} while ( node = node.nextSibling );
+			}
+
+			remove.length && $(remove).remove();
+		});
+	};  
+})(jQuery);
+
 jQuery(document).ready((function($){
 
   function get_hlst_query() {
@@ -17,7 +42,7 @@ jQuery(document).ready((function($){
 /*
 console.log('referer query parameters: ' + ref[1]);
 */
-    if (typeof(ref[1]) != 'undefined'){
+    if (typeof(ref[1]) != 'undefined') {
       var term;
       if (document.referrer.indexOf(document.domain) < 9) {
         term = 's';
@@ -71,21 +96,29 @@ console.log('going into get_hlst_query()');
 */
     	get_hlst_query();
     }
-    var area; var i; var s;
-    for (s in hlst_areas){
-      area = $(hlst_areas[s]);
-      if (area.length != 0){
-        for (var l = 0; l < area.length; l++) {
-		for (i in hlst_query){
+    var area, i, s, c;
+    var c = 'ig'; // TODO make case sensitivity optional
+	var t = jQuery.support.opacity ? 'mark' : 'span';
+
+	if (hlst_query.length != 0) {
+		for (s in hlst_areas){
+		  area = $(hlst_areas[s]);
 /*
-console.log('keyword: ' + hlst_query[i]);
+console.log('testing area: ' + hlst_areas[s]);
 */
-		  area.eq(l).highlight(hlst_query[i], 1, 'hilite term-' + i);
+		    if (area.length != 0){
+			for (var l = 0; l < area.length; l++) {
+				for (i in hlst_query){
+/*
+console.log('searching for: ' + hlst_query[i]);
+*/
+				    $(hlst_areas[s] + ' *').highlight(hlst_query[i], 1, t,'hilite term-' + i);
+				}
+			}
+			break;
+		    }
 		}
 	}
-      	break;
-      }
-    }
   }
   
   if ('function'==typeof Cufon) Cufon.refresh();
