@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=r
 Tags: mark, highlight, hilite, search, term, terms, jquery
 Requires at least: 2.3
 Tested up to: 4.0
-Stable tag: 1.3
+Stable tag: 1.3.9
 
 Very lightweight jQuery script that wraps search terms in an HTML5 mark tag when referer is a search engine or within wp search results.
 
@@ -146,12 +146,17 @@ Please provide me with a bugreport, suggestion or question if you run into any p
 
 = 1.3.9 =
 
-* WordPress 3.8 search comptatibily (allowing less fuzzy search with quotes)
+Date 2014-09-04
+Dev time: 5h
+
+* WordPress 3.8 search comptatibily allowing less fuzzy search with quotes
+* ?sentence=1 query paramater compat
 * FIX: XSS vulnerability found by [Rodolfo Godalle, Jr.](http://www.facebook.com/junior.ns1de)
 
 = 1.3 =
 
 Date 2013-09-02
+Dev time: 2h
 
 * BuddyPress and bbPress highlighting within forum searches
 * FIX: jQuery 1.10 compatibility
@@ -159,6 +164,7 @@ Date 2013-09-02
 = 1.2.5 =
 
 Date 2013-07-28
+Dev time: 1h
 
 * FIX: Combine-JS compatibility (Thanks to Joshua Hoke)
 * More possible classes and ids to look for
@@ -166,18 +172,21 @@ Date 2013-07-28
 = 1.2.4 =
 
 Date 2012-12-16
+Dev time: 1h
 
 * BUGFIX: non-western languages in URL not decoded
 
 = 1.2.3 =
 
 Date 2012-12-06
+Dev time: 1h
 
 * BUGFIX: javascript infinite loop
 
 = 1.2.2 =
 
 Date 2012-10-11
+Dev time: 6h
 
 * Search terms wrapped in double qoutes now considered as single term
 * Caching compatible
@@ -189,12 +198,14 @@ Date 2012-10-11
 = 1.2.1 =
 
 Date 2012-07-27
+Dev time: 1h
 
 * BUGFIX: non HTML5 browser (IE8 and older) support failing
 
 = 1.2 =
 
 Date 2012-07-25
+Dev time: 8h
 
 * NEW: Caching (WP Super Cache) compatibility
 * NEW: Highlights not only on WP search results page but also one click deeper inside any of the found pages
@@ -206,6 +217,7 @@ Date 2012-07-25
 = 0.8 =
 
 Date 2012-04-18
+Dev time: 2h
 
 * HTML5 mark tag support
 * No more word boundery limit for non-latin based languages compatibility
@@ -213,12 +225,14 @@ Date 2012-04-18
 = 0.7 =
 
 Date: 2011-01-03
+Dev time: 1h
 
 * BUGFIX: conflict with Cufon script
 
 = 0.6 =
 
 Date: 2010-09-06
+Dev time: 2h
 
 * limit highlited search terms to word boundery
 * added Bing, Ask, Baidu and Youdao search engines
@@ -228,6 +242,7 @@ Date: 2010-09-06
 = 0.5 =
 
 Date: 2010-08-07
+Dev time: 2h
 
 * using jQuery in no-conflict mode and $hlst instead of $ to avoid conflict with prototype
 * split variables and moved js extention in compacted form to static file
@@ -236,6 +251,7 @@ Date: 2010-08-07
 = 0.4 =
 
 Date: 2010-04-07
+Dev time: 1h
 
 * fixed Regular Expression to allow parts of words to be highlighted
 * search term wrapping limited to .hentry divs
@@ -243,16 +259,20 @@ Date: 2010-04-07
 = 0.3 =
 
 Date: 2009-04-16
+Dev time: 1h
 
 * Bugfix for Firefox 2+ (forcefully highlights now limited to div#content)
 
 = 0.2 =
 
 Date: 2009-04-15
+Dev time: 1h
 
 * Allowing for multiple search term styling + Bugfix for IE7 / IE8
 
 = 0.1 =
 
 Date: 2009-04-14
+Dev time: 3h
+
 - Basic plugin aimed at low impact / low resource demand on your WP installation using client side javascript.

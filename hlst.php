@@ -3,7 +3,7 @@
 Plugin Name: Highlight Search Terms
 Plugin URI: http://status301.net/wordpress-plugins/highlight-search-terms
 Description: Wraps search terms in the HTML5 mark tag when referer is a search engine or within wp search results. No options to set. Read <a href="http://wordpress.org/extend/plugins/highlight-search-terms/other_notes/">Other Notes</a> for instructions and examples for styling the highlights. <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ravanhagen%40gmail%2ecom&item_name=Highlight%20Search%20Terms&item_number=0%2e6&no_shipping=0&tax=0&bn=PP%2dDonationsBF&charset=UTF%2d8&lc=us" title="Thank you!">Tip jar</a>.
-Version: 1.3.11
+Version: 1.3.9
 Author: RavanH
 Author URI: http://status301.net/
 */
@@ -76,14 +76,14 @@ class HighlightSearchTerms {
 
 	public static function init() {
 		// -- HOOKING INTO WP -- //
-		add_action('init', array(__CLASS__, 'register_script'));
+		add_action('wp_enqueue_scripts', array(__CLASS__, 'enqueue_script'));
 		
-		// Set query string as js variable in header
-		add_action('wp_head', array(__CLASS__, 'query') );
+		// Set query string as js variable in footer
+		add_action('wp_footer', array(__CLASS__, 'query') );
 
 	}
 
-	public static function register_script() {
+	public static function enqueue_script() {
 		if ( defined('WP_DEBUG') && true == WP_DEBUG )
 			wp_enqueue_script('hlst-extend', plugins_url('hlst-extend.uncompressed.js', __FILE__), array('jquery'), HLST_VERSION, true);
 		else

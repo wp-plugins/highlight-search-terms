@@ -7,7 +7,7 @@
 				val,
 				new_val,
 				remove = [],
-				skip = ['SCRIPT', 'STYLE', 'INPUT', 'SELECT', 'BUTTON', 'OBJECT', 'APPLET', 'CODE', 'EMBED', 'IFRAME'];
+				skip = ['SCRIPT', 'STYLE', 'INPUT', 'SELECT', 'BUTTON', 'OBJECT', 'APPLET', 'TEXTAREA', 'PRE', 'CODE', 'EMBED', 'IFRAME'];
 
 			if ( term && node && $.inArray(this.nodeName, skip) == -1 ) {
 				var regex = new RegExp( term.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1"), insensitive ? 'ig' : 'g');
